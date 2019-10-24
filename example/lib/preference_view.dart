@@ -39,8 +39,18 @@ class OrgFileUrlView extends StatefulWidget {
 class _OrgFileUrlState extends State<OrgFileUrlView> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return Scaffold(
+      body: Container(
+        child: ListView.builder(
+          itemBuilder: null,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        onPressed: () {},
+      ),
+    );
   }
 }
 
@@ -52,8 +62,18 @@ class TodoKeywordView extends StatefulWidget {
 class _TodoKeywordState extends State<TodoKeywordView> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return Scaffold(
+      body: Container(
+        child: ListView.builder(
+          itemBuilder: null,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        onPressed: () {},
+      ),
+    );
   }
 }
 
@@ -65,7 +85,17 @@ class DoneKeywordView extends StatefulWidget {
 class _DoneKeywordState extends State<TodoKeywordView> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return Scaffold(
+      body: Container(
+        child: ListView.builder(
+          itemBuilder: null,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        onPressed: () {},
+      ),
+    );
   }
 }

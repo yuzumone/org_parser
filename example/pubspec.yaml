@@ -1,0 +1,24 @@
+name: org_parser_example
+description: Demonstrates how to use the org_parser plugin.
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  shared_preferences: ^0.5.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  org_parser:
+    path: ../
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/

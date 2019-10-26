@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:provider/provider.dart';
 import 'dart:async';
 
 import 'package:org_parser/org_parser.dart';
@@ -8,9 +9,30 @@ import 'preference_view.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: _StatefulProvider(
+        child: _HomeView(),
+      ),
+    );
+  }
+}
+
+class _StatefulProvider extends StatefulWidget {
+  const _StatefulProvider({
+    Key key,
+    @required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  _StatefulProviderState createState() => _StatefulProviderState();
 }
 
 class FilesView extends StatelessWidget {
@@ -27,32 +49,24 @@ class AgendaView extends StatelessWidget {
   }
 }
 
-class _MyAppState extends State<MyApp> {
-  OrgFile _file;
-  PreferenceUtil prefUtil;
+class _StatefulProviderState extends State<_StatefulProvider> {
+  PreferenceUtil _prefUtil;
   Preference _prefs;
-  List<String> orgFileUrls;
-  PageController _pageController;
+  List<OrgFile> _files = [];
   int _pageIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
     _loadOrgAsset().then((org) {
       loadOrg(org).then((file) {
-        setState(() => _file = file);
+        setState(() => _files.add(file));
       });
     });
-    prefUtil = PreferenceUtil();
-    prefUtil.getPreference().then((x) {
-      print(x);
+    _prefUtil = PreferenceUtil();
+    _prefUtil.getPreference().then((pref) {
+      setState(() => _prefs = pref);
     });
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
   }
 
   Future<String> _loadOrgAsset() async {
@@ -61,25 +75,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return MultiProvider(
+      providers: [
+        Provider<Preference>.value(value: _prefs),
+        Provider<List<OrgFile>>.value(value: _files),
+        Provider<int>.value(value: _pageIndex),
+      ],
+      child: Scaffold(
         appBar: AppBar(
           title: const Text('Org Mobile'),
         ),
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: (index) => setState(() => _pageIndex = index),
-          children: <Widget>[
-            FilesView(),
-            AgendaView(),
-            PreferenceView(),
-          ],
-        ),
+        body: Container(child: widget.child),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _pageIndex,
-          onTap: (index) => _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 280),
-              curve: Curves.ease),
+          onTap: (index) => setState(() => _pageIndex = index),
           items: [
             BottomNavigationBarItem(
               title: Text('Files'),
@@ -97,5 +106,20 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+class _HomeView extends StatelessWidget {
+  List<Widget> _listWidgets = <Widget>[
+    FilesView(),
+    AgendaView(),
+    PreferenceView(),
+  ];
+  int _pageIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    int index = Provider.of<int>(context);
+    return _listWidgets.elementAt(index);
   }
 }

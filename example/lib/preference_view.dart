@@ -29,9 +29,42 @@ class PreferenceView extends StatelessWidget {
             },
           ),
         ],
-      )
+      ),
     );
   }
+}
+
+Future<String> _buildInputDialog(BuildContext context, String title) async {
+  String result = '';
+  return showDialog<String>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Row(
+          children: <Widget>[
+            Expanded(
+              child: TextField(
+                autofocus: true,
+                onChanged: (value) => result = value,
+              ),
+            )
+          ],
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('OK'),
+            onPressed: () => Navigator.of(context).pop(result),
+          ),
+          FlatButton(
+            child: Text('CANCEL'),
+            onPressed: () => Navigator.of(context).pop(null),
+          )
+        ],
+      );
+    },
+  );
 }
 
 class OrgFileUrlView extends StatefulWidget {
@@ -70,7 +103,14 @@ class _OrgFileUrlState extends State<OrgFileUrlView> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () {},
+        onPressed: () async {
+          final String result =
+              await _buildInputDialog(context, 'Input File Url');
+          if (result != null) {
+            setState(() => _urls.add(result));
+            _prefUtil.setUrls(_urls);
+          }
+        },
       ),
     );
   }
@@ -112,7 +152,14 @@ class _TodoKeywordState extends State<TodoKeywordView> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () {},
+        onPressed: () async {
+          final String result =
+              await _buildInputDialog(context, 'Input Todo Keyword');
+          if (result != null) {
+            setState(() => _todoKeyword.add(result));
+            _prefUtil.setTodoKeywords(_todoKeyword);
+          }
+        },
       ),
     );
   }
@@ -154,7 +201,14 @@ class _DoneKeywordState extends State<DoneKeywordView> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () {},
+        onPressed: () async {
+          final String result =
+              await _buildInputDialog(context, 'Input Done Keyword');
+          if (result != null) {
+            setState(() => _doneKeyword.add(result));
+            _prefUtil.setDoneKeywords(_doneKeyword);
+          }
+        },
       ),
     );
   }

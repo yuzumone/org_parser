@@ -16,9 +16,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _StatefulProvider(
-        child: _HomeView(),
-      ),
+      routes: <String, WidgetBuilder>{
+        '/': (_) => _StatefulProvider(
+              child: _HomeView(),
+            ),
+        '/pref_url': (_) => OrgFileUrlView(),
+        '/pref_todo_keyword': (_) => TodoKeywordView(),
+        '/pref_done_keyword': (_) => DoneKeywordView(),
+      },
     );
   }
 }

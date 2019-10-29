@@ -96,7 +96,10 @@ class _OrgFileUrlState extends State<OrgFileUrlView> {
           itemCount: _urls.length,
           itemBuilder: (BuildContext context, int index) => ListTile(
             title: Text(_urls[index]),
-            onTap: () {},
+            onLongPress: () {
+              setState(() => _urls.removeAt(index));
+              _prefUtil.setUrls(_urls);
+            },
           ),
         ),
       ),
@@ -145,7 +148,10 @@ class _TodoKeywordState extends State<TodoKeywordView> {
           itemCount: _todoKeyword.length,
           itemBuilder: (BuildContext context, int index) => ListTile(
             title: Text(_todoKeyword[index]),
-            onTap: () {},
+            onLongPress: () {
+              setState(() => _todoKeyword.removeAt(index));
+              _prefUtil.setTodoKeywords(_todoKeyword);
+            },
           ),
         ),
       ),
@@ -194,7 +200,10 @@ class _DoneKeywordState extends State<DoneKeywordView> {
           itemCount: _doneKeyword.length,
           itemBuilder: (BuildContext context, int index) => ListTile(
             title: Text(_doneKeyword[index]),
-            onTap: () {},
+            onLongPress: () {
+              setState(() => _doneKeyword.removeAt(index));
+              _prefUtil.setDoneKeywords(_doneKeyword);
+            },
           ),
         ),
       ),

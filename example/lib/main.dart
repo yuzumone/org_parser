@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:org_parser_example/model.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 
-import 'package:org_parser/org_parser.dart';
 import 'preference_utils.dart';
 import 'preference_view.dart';
+import 'repository.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,7 +42,14 @@ class _StatefulProvider extends StatefulWidget {
 class FilesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text("page1");
+    var files = Provider.of<List<File>>(context);
+    return ListView.builder(
+      itemCount: files.length,
+      itemBuilder: (BuildContext context, int index) => ListTile(
+        title: Text(files[index].name),
+        onTap: () {},
+      ),
+    );
   }
 }
 
@@ -56,26 +62,23 @@ class AgendaView extends StatelessWidget {
 
 class _StatefulProviderState extends State<_StatefulProvider> {
   PreferenceUtil _prefUtil;
+  FileRepository _repository;
   Preference _prefs;
-  List<OrgFile> _files = [];
+  List<File> _files = [];
   int _pageIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _loadOrgAsset().then((org) {
-      loadOrg(org).then((file) {
-        setState(() => _files.add(file));
-      });
-    });
     _prefUtil = PreferenceUtil();
+    _repository = FileRepository();
     _prefUtil.getPreference().then((pref) {
       setState(() => _prefs = pref);
+      var keywords = pref.todoKeywords + pref.doneKeywords;
+      _repository
+          .getWebFiles(pref.urls, keywords)
+          .then((f) => setState(() => _files = f));
     });
-  }
-
-  Future<String> _loadOrgAsset() async {
-    return await rootBundle.loadString('assets/test.org');
   }
 
   @override
@@ -83,7 +86,7 @@ class _StatefulProviderState extends State<_StatefulProvider> {
     return MultiProvider(
       providers: [
         Provider<Preference>.value(value: _prefs),
-        Provider<List<OrgFile>>.value(value: _files),
+        Provider<List<File>>.value(value: _files),
         Provider<int>.value(value: _pageIndex),
       ],
       child: Scaffold(

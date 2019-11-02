@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'preference_utils.dart';
 import 'preference_view.dart';
 import 'repository.dart';
+import 'file_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,20 +38,6 @@ class _StatefulProvider extends StatefulWidget {
 
   @override
   _StatefulProviderState createState() => _StatefulProviderState();
-}
-
-class FilesView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var files = Provider.of<List<File>>(context);
-    return ListView.builder(
-      itemCount: files.length,
-      itemBuilder: (BuildContext context, int index) => ListTile(
-        title: Text(files[index].name),
-        onTap: () {},
-      ),
-    );
-  }
 }
 
 class AgendaView extends StatelessWidget {

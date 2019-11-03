@@ -6,6 +6,7 @@ import 'preference_utils.dart';
 import 'preference_view.dart';
 import 'repository.dart';
 import 'file_view.dart';
+import 'agenda_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,13 +39,6 @@ class _StatefulProvider extends StatefulWidget {
 
   @override
   _StatefulProviderState createState() => _StatefulProviderState();
-}
-
-class AgendaView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Text("page2");
-  }
 }
 
 class _StatefulProviderState extends State<_StatefulProvider> {

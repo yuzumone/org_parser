@@ -7,6 +7,7 @@ import 'preference_view.dart';
 import 'repository.dart';
 import 'file_view.dart';
 import 'agenda_view.dart';
+import 'todo_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,6 +79,8 @@ class _StatefulProviderState extends State<_StatefulProvider> {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _pageIndex,
           onTap: (index) => setState(() => _pageIndex = index),
+          unselectedItemColor: Colors.black54,
+          selectedItemColor: Colors.blue,
           items: [
             BottomNavigationBarItem(
               title: Text('Files'),
@@ -86,6 +89,10 @@ class _StatefulProviderState extends State<_StatefulProvider> {
             BottomNavigationBarItem(
               title: Text('Agenda'),
               icon: Icon(Icons.calendar_today),
+            ),
+            BottomNavigationBarItem(
+              title: Text('Todo'),
+              icon: Icon(Icons.alarm),
             ),
             BottomNavigationBarItem(
               title: Text('Setting'),
@@ -99,12 +106,13 @@ class _StatefulProviderState extends State<_StatefulProvider> {
 }
 
 class _HomeView extends StatelessWidget {
-  List<Widget> _listWidgets = <Widget>[
+  final List<Widget> _listWidgets = <Widget>[
     FilesView(),
     AgendaView(),
+    TodoView(),
     PreferenceView(),
   ];
-  int _pageIndex = 0;
+  final int _pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {

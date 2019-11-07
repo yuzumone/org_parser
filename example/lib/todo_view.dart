@@ -4,6 +4,7 @@ import 'package:org_parser/org_parser.dart';
 
 import 'model.dart';
 import 'preference_utils.dart';
+import 'detail_view.dart';
 
 class TodoView extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class TodoView extends StatelessWidget {
     return ListView.builder(
         itemCount: todos.length,
         itemBuilder: (BuildContext context, int index) =>
-            _buildListTile(todos[index]));
+            _buildListTile(context, todos[index]));
   }
 
   List<Headline> _getTodoList(List<File> files, List<String> todoKeyword) {
@@ -24,7 +25,7 @@ class TodoView extends StatelessWidget {
         .toList();
   }
 
-  Widget _buildListTile(Headline headline) {
+  Widget _buildListTile(BuildContext context, Headline headline) {
     return InkWell(
       child: Container(
         padding: const EdgeInsets.all(16.0),
@@ -43,7 +44,16 @@ class TodoView extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailView(
+              headline: headline,
+            ),
+          ),
+        );
+      },
     );
   }
 }

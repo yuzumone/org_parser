@@ -14,6 +14,7 @@ class OrgFile {
 class Headline {
   int level;
   String title;
+  List<String> chunks;
   String raw;
   String keyword;
   String name;
@@ -22,7 +23,7 @@ class Headline {
   String deadline;
   DateTime deadlineDateTime;
 
-  Headline(this.level, this.title, this.raw);
+  Headline(this.level, this.title, this.chunks, this.raw);
 
   get isTodo => keyword != null;
 

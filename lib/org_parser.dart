@@ -66,7 +66,7 @@ class OrgParser {
     if (match != null) {
       var level = match.group(1).length;
       var title = match.group(2);
-      return Headline(level, title, chunks.toString());
+      return Headline(level, title, chunks, chunks.join('\n'));
     }
     return null;
   }

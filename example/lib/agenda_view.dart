@@ -4,6 +4,7 @@ import 'package:org_parser/org_parser.dart';
 
 import 'model.dart';
 import 'preference_utils.dart';
+import 'detail_view.dart';
 
 class AgendaView extends StatelessWidget {
   @override
@@ -13,8 +14,8 @@ class AgendaView extends StatelessWidget {
     var agenda = _getAgendaList(files);
     return ListView.builder(
       itemCount: agenda.length,
-      itemBuilder: (BuildContext context, int index) =>
-          _buildListTile(agenda[index], prefs.todoKeywords, prefs.doneKeywords),
+      itemBuilder: (BuildContext context, int index) => _buildListTile(
+          context, agenda[index], prefs.todoKeywords, prefs.doneKeywords),
     );
   }
 
@@ -44,8 +45,8 @@ class AgendaView extends StatelessWidget {
     }
   }
 
-  Widget _buildListTile(
-      Headline headline, List<String> todoKeyword, List<String> doneKeyword) {
+  Widget _buildListTile(BuildContext context, Headline headline,
+      List<String> todoKeyword, List<String> doneKeyword) {
     return InkWell(
       child: Container(
         padding: const EdgeInsets.all(16.0),
@@ -82,7 +83,16 @@ class AgendaView extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailView(
+              headline: headline,
+            ),
+          ),
+        );
+      },
     );
   }
 }

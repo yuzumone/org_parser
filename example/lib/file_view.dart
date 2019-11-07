@@ -4,6 +4,7 @@ import 'package:org_parser/org_parser.dart';
 
 import 'model.dart';
 import 'preference_utils.dart';
+import 'detail_view.dart';
 
 class FilesView extends StatelessWidget {
   @override
@@ -122,7 +123,16 @@ class _HeadlineView extends StatelessWidget {
               ],
             )),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailView(
+              headline: headline,
+            ),
+          ),
+        );
+      },
     );
   }
 

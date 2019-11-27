@@ -29,19 +29,15 @@ class TodoView extends StatelessWidget {
     return InkWell(
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: <Widget>[
-            Container(
-              child: Text(
-                headline.title,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              ),
+        child: Container(
+          child: Text(
+            headline.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Colors.red,
             ),
-          ],
+          ),
         ),
       ),
       onTap: () {

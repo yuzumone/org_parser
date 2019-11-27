@@ -86,42 +86,37 @@ class _HeadlineView extends StatelessWidget {
         padding:
             EdgeInsets.only(left: 8.0, right: 16.0, top: 16.0, bottom: 16.0),
         child: Container(
-            padding: EdgeInsets.only(
-              left: (8.0 * headline.level).toDouble(),
-            ),
-            child: Row(
-              children: <Widget>[
-                Divider(
-                  height: 10,
-                  color: Colors.black,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      headline.title,
-                      style: TextStyle(
-                          color: _getTextColor(
-                              headline.keyword, todoKeywords, doneKeywords)),
-                    ),
-                    SizedBox(
-                      height: 4.0,
-                    ),
-                    Visibility(
-                      child: Text("Sheduled: ${headline.scheduled}"),
-                      visible: headline.scheduled != null,
-                    ),
-                    SizedBox(
-                      height: 4.0,
-                    ),
-                    Visibility(
-                      child: Text("Deadline: ${headline.deadline}"),
-                      visible: headline.deadline != null,
-                    )
-                  ],
-                ),
-              ],
-            )),
+          padding: EdgeInsets.only(
+            left: (8.0 * headline.level).toDouble(),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                headline.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: _getTextColor(
+                        headline.keyword, todoKeywords, doneKeywords)),
+              ),
+              SizedBox(
+                height: 4.0,
+              ),
+              Visibility(
+                child: Text("Sheduled: ${headline.scheduled}"),
+                visible: headline.scheduled != null,
+              ),
+              SizedBox(
+                height: 4.0,
+              ),
+              Visibility(
+                child: Text("Deadline: ${headline.deadline}"),
+                visible: headline.deadline != null,
+              )
+            ],
+          ),
+        ),
       ),
       onTap: () {
         Navigator.push(

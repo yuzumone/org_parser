@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:org_parser_example/model.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'preference_utils.dart';
 import 'preference_view.dart';
@@ -15,6 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('ja', ''),
+      ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

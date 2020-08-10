@@ -120,7 +120,6 @@ class _HomeView extends StatelessWidget {
     TodoView(),
     PreferenceView(),
   ];
-  final int _pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {

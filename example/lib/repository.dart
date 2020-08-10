@@ -9,7 +9,8 @@ class FileRepository {
   RetryClient client;
 
   FileRepository() {
-    client = RetryClient(http.Client(),
+    client = RetryClient(
+      http.Client(),
       retries: 5,
       when: (response) => response.statusCode > 299,
       whenError: (dynamic error, StackTrace stackTrace) {
@@ -24,6 +25,7 @@ class FileRepository {
       var org = await loadOrg(utf8.decode(res.bodyBytes), keywords: keywords);
       return File(url, org);
     }
+    return null;
   }
 
   Future<List<File>> getWebFiles(

@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
-import 'model.dart';
-import 'preference_utils.dart';
+import 'package:org_parser_example/state/home_view_state.dart';
+import 'package:org_parser_example/model.dart';
 import 'detail_view.dart';
 
 class FilesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var files = Provider.of<List<File>>(context);
-    var prefs = Provider.of<Preference>(context);
+    var files =
+        context.select<HomeViewState, List<File>>((state) => state.files);
+    var todoKeywords = context
+        .select<HomeViewState, List<String>>((state) => state.todoKeywords);
+    var doneKeywords = context
+        .select<HomeViewState, List<String>>((state) => state.doneKeywords);
     return ListView.builder(
       itemCount: files.length,
       itemBuilder: (BuildContext context, int index) => ListTile(
@@ -22,8 +26,8 @@ class FilesView extends StatelessWidget {
               builder: (context) => _HeadlineListView(
                 name: files[index].name,
                 org: files[index].org,
-                todoKeywords: prefs.todoKeywords,
-                doneKeywords: prefs.doneKeywords,
+                todoKeywords: todoKeywords,
+                doneKeywords: doneKeywords,
               ),
             ),
           );

@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
-import 'model.dart';
-import 'preference_utils.dart';
+import 'package:org_parser_example/state/home_view_state.dart';
+import 'package:org_parser_example/model.dart';
 import 'detail_view.dart';
 
 class AgendaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var files = Provider.of<List<File>>(context);
-    var prefs = Provider.of<Preference>(context);
+    var files =
+        context.select<HomeViewState, List<File>>((state) => state.files);
+    var todoKeywords = context
+        .select<HomeViewState, List<String>>((state) => state.todoKeywords);
+    var doneKeywords = context
+        .select<HomeViewState, List<String>>((state) => state.doneKeywords);
     var agenda = _getAgendaList(files);
     return ListView.builder(
       itemCount: agenda.length,
-      itemBuilder: (BuildContext context, int index) => _buildListTile(
-          context, agenda[index], prefs.todoKeywords, prefs.doneKeywords),
+      itemBuilder: (BuildContext context, int index) =>
+          _buildListTile(context, agenda[index], todoKeywords, doneKeywords),
     );
   }
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:org_parser_example/preference_utils.dart';
+import 'package:provider/provider.dart';
+import 'package:org_parser_example/state/done_keyword_view_state.dart';
+import 'package:org_parser_example/state/todo_keyword_view_state.dart';
+import 'package:org_parser_example/state/org_file_url_view_state.dart';
 
 class PreferenceView extends StatelessWidget {
   @override
@@ -67,38 +70,24 @@ Future<String> _buildInputDialog(BuildContext context, String title) async {
   );
 }
 
-class OrgFileUrlView extends StatefulWidget {
-  @override
-  _OrgFileUrlState createState() => _OrgFileUrlState();
-}
-
-class _OrgFileUrlState extends State<OrgFileUrlView> {
-  PreferenceUtil _prefUtil;
-  List<String> _urls = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _prefUtil = PreferenceUtil();
-    _prefUtil.getPreference().then((prefs) {
-      setState(() => _urls = prefs.urls);
-    });
-  }
-
+class OrgFileUrlView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var urls = context
+        .select<OrgFileUrlViewState, List<String>>((state) => state.urls);
     return Scaffold(
       appBar: AppBar(
         title: Text('Org File Url'),
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: _urls.length,
+          itemCount: urls.length,
           itemBuilder: (BuildContext context, int index) => ListTile(
-            title: Text(_urls[index]),
+            title: Text(urls[index]),
             onLongPress: () {
-              setState(() => _urls.removeAt(index));
-              _prefUtil.setUrls(_urls);
+              context
+                  .read<OrgFileUrlViewStateNotifier>()
+                  .setUrls(List.from(urls)..removeAt(index));
             },
           ),
         ),
@@ -110,8 +99,9 @@ class _OrgFileUrlState extends State<OrgFileUrlView> {
           final String result =
               await _buildInputDialog(context, 'Input File Url');
           if (result != null) {
-            setState(() => _urls.add(result));
-            _prefUtil.setUrls(_urls);
+            context
+                .read<OrgFileUrlViewStateNotifier>()
+                .setUrls(List.from(urls)..add(result));
           }
         },
       ),
@@ -119,38 +109,23 @@ class _OrgFileUrlState extends State<OrgFileUrlView> {
   }
 }
 
-class TodoKeywordView extends StatefulWidget {
-  @override
-  _TodoKeywordState createState() => _TodoKeywordState();
-}
-
-class _TodoKeywordState extends State<TodoKeywordView> {
-  PreferenceUtil _prefUtil;
-  List<String> _todoKeyword = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _prefUtil = PreferenceUtil();
-    _prefUtil.getPreference().then((prefs) {
-      setState(() => _todoKeyword = prefs.todoKeywords);
-    });
-  }
-
+class TodoKeywordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var todoKeywords = context.watch<TodoKeywordViewState>().todoKeywords;
     return Scaffold(
       appBar: AppBar(
         title: Text('Todo Keyword'),
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: _todoKeyword.length,
+          itemCount: todoKeywords.length,
           itemBuilder: (BuildContext context, int index) => ListTile(
-            title: Text(_todoKeyword[index]),
+            title: Text(todoKeywords[index]),
             onLongPress: () {
-              setState(() => _todoKeyword.removeAt(index));
-              _prefUtil.setTodoKeywords(_todoKeyword);
+              context
+                  .read<TodoKeywordViewStateNotifier>()
+                  .setTodoKeywords(List.from(todoKeywords)..removeAt(index));
             },
           ),
         ),
@@ -162,8 +137,9 @@ class _TodoKeywordState extends State<TodoKeywordView> {
           final String result =
               await _buildInputDialog(context, 'Input Todo Keyword');
           if (result != null) {
-            setState(() => _todoKeyword.add(result));
-            _prefUtil.setTodoKeywords(_todoKeyword);
+            context
+                .read<TodoKeywordViewStateNotifier>()
+                .setTodoKeywords(List.from(todoKeywords)..add(result));
           }
         },
       ),
@@ -171,38 +147,24 @@ class _TodoKeywordState extends State<TodoKeywordView> {
   }
 }
 
-class DoneKeywordView extends StatefulWidget {
-  @override
-  _DoneKeywordState createState() => _DoneKeywordState();
-}
-
-class _DoneKeywordState extends State<DoneKeywordView> {
-  PreferenceUtil _prefUtil;
-  List<String> _doneKeyword = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _prefUtil = PreferenceUtil();
-    _prefUtil.getPreference().then((prefs) {
-      setState(() => _doneKeyword = prefs.doneKeywords);
-    });
-  }
-
+class DoneKeywordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var doneKeywords = context.select<DoneKeywordViewState, List<String>>(
+        (state) => state.doneKeywords);
     return Scaffold(
       appBar: AppBar(
         title: Text('Done Keyword'),
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: _doneKeyword.length,
+          itemCount: doneKeywords.length,
           itemBuilder: (BuildContext context, int index) => ListTile(
-            title: Text(_doneKeyword[index]),
+            title: Text(doneKeywords[index]),
             onLongPress: () {
-              setState(() => _doneKeyword.removeAt(index));
-              _prefUtil.setDoneKeywords(_doneKeyword);
+              context
+                  .read<DoneKeywordViewNotifier>()
+                  .setDoneKeywords(List.from(doneKeywords)..removeAt(index));
             },
           ),
         ),
@@ -214,8 +176,9 @@ class _DoneKeywordState extends State<DoneKeywordView> {
           final String result =
               await _buildInputDialog(context, 'Input Done Keyword');
           if (result != null) {
-            setState(() => _doneKeyword.add(result));
-            _prefUtil.setDoneKeywords(_doneKeyword);
+            context
+                .read<DoneKeywordViewNotifier>()
+                .setDoneKeywords(List.from(doneKeywords)..add(result));
           }
         },
       ),

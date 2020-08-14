@@ -13,7 +13,7 @@ abstract class OrgFileUrlViewState with _$OrgFileUrlViewState {
 }
 
 class OrgFileUrlViewStateNotifier extends StateNotifier<OrgFileUrlViewState> {
-  var _prefUtil = PreferenceUtil();
+  final _prefUtil = PreferenceUtil();
 
   OrgFileUrlViewStateNotifier() : super(const OrgFileUrlViewState()) {
     init();

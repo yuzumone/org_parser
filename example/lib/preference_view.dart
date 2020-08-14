@@ -14,21 +14,21 @@ class PreferenceView extends StatelessWidget {
             title: Text('Org File'),
             subtitle: Text('OrgファイルのURL'),
             onTap: () {
-              Navigator.of(context).pushNamed("/pref_url");
+              Navigator.of(context).pushNamed('/pref_url');
             },
           ),
           ListTile(
             title: Text('TODO Keyword'),
             subtitle: Text('完了のTODOと認識するキーワード'),
             onTap: () {
-              Navigator.of(context).pushNamed("/pref_todo_keyword");
+              Navigator.of(context).pushNamed('/pref_todo_keyword');
             },
           ),
           ListTile(
             title: Text('DONE Keyword'),
             subtitle: Text('未完了のTODOと認識するキーワード'),
             onTap: () {
-              Navigator.of(context).pushNamed("/pref_done_keyword");
+              Navigator.of(context).pushNamed('/pref_done_keyword');
             },
           ),
         ],
@@ -38,7 +38,7 @@ class PreferenceView extends StatelessWidget {
 }
 
 Future<String> _buildInputDialog(BuildContext context, String title) async {
-  String result = '';
+  var result = '';
   return showDialog<String>(
     context: context,
     barrierDismissible: false,
@@ -96,8 +96,7 @@ class OrgFileUrlView extends StatelessWidget {
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
         onPressed: () async {
-          final String result =
-              await _buildInputDialog(context, 'Input File Url');
+          final result = await _buildInputDialog(context, 'Input File Url');
           if (result != null) {
             context
                 .read<OrgFileUrlViewStateNotifier>()
@@ -134,8 +133,7 @@ class TodoKeywordView extends StatelessWidget {
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
         onPressed: () async {
-          final String result =
-              await _buildInputDialog(context, 'Input Todo Keyword');
+          final result = await _buildInputDialog(context, 'Input Todo Keyword');
           if (result != null) {
             context
                 .read<TodoKeywordViewStateNotifier>()
@@ -173,8 +171,7 @@ class DoneKeywordView extends StatelessWidget {
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
         onPressed: () async {
-          final String result =
-              await _buildInputDialog(context, 'Input Done Keyword');
+          final result = await _buildInputDialog(context, 'Input Done Keyword');
           if (result != null) {
             context
                 .read<DoneKeywordViewNotifier>()

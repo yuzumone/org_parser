@@ -13,7 +13,7 @@ abstract class DoneKeywordViewState with _$DoneKeywordViewState {
 }
 
 class DoneKeywordViewNotifier extends StateNotifier<DoneKeywordViewState> {
-  var _prefUtil = PreferenceUtil();
+  final _prefUtil = PreferenceUtil();
 
   DoneKeywordViewNotifier() : super(const DoneKeywordViewState()) {
     init();
@@ -26,7 +26,7 @@ class DoneKeywordViewNotifier extends StateNotifier<DoneKeywordViewState> {
     );
   }
 
-  setDoneKeywords(List<String> doneKeywords) {
+  void setDoneKeywords(List<String> doneKeywords) {
     state = state.copyWith(doneKeywords: doneKeywords);
     _prefUtil.setDoneKeywords(doneKeywords);
   }

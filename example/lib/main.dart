@@ -4,10 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
 import 'package:org_parser_example/state/home_view_state.dart';
-import 'package:org_parser_example/state/org_file_url_view_state.dart';
-import 'package:org_parser_example/state/todo_keyword_view_state.dart';
-import 'package:org_parser_example/state/done_keyword_view_state.dart';
-import 'preference_view.dart';
+import 'package:org_parser_example/ui/preference/preference_view.dart';
+import 'package:org_parser_example/ui/preference/preference_view_state.dart';
 import 'file_view.dart';
 import 'agenda_view.dart';
 import 'todo_view.dart';
@@ -33,20 +31,10 @@ class MyApp extends StatelessWidget {
               create: (_) => HomeViewStateNotifier(),
               child: _HomeView(),
             ),
-        '/pref_url': (_) => StateNotifierProvider<OrgFileUrlViewStateNotifier,
-                OrgFileUrlViewState>(
-              create: (_) => OrgFileUrlViewStateNotifier(),
-              child: OrgFileUrlView(),
-            ),
-        '/pref_todo_keyword': (_) => StateNotifierProvider<
-                TodoKeywordViewStateNotifier, TodoKeywordViewState>(
-              create: (_) => TodoKeywordViewStateNotifier(),
-              child: TodoKeywordView(),
-            ),
-        '/pref_done_keyword': (_) => StateNotifierProvider<
-                DoneKeywordViewNotifier, DoneKeywordViewState>(
-              create: (_) => DoneKeywordViewNotifier(),
-              child: DoneKeywordView(),
+        '/preference': (_) => StateNotifierProvider<PreferenceViewStateNotifier,
+                PreferenceViewState>(
+              create: (_) => PreferenceViewStateNotifier(),
+              child: PreferenceView(),
             ),
       },
     );
@@ -58,7 +46,6 @@ class _HomeView extends StatelessWidget {
     FilesView(),
     AgendaView(),
     TodoView(),
-    PreferenceView(),
   ];
 
   @override
@@ -66,6 +53,12 @@ class _HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Org Mobile'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () => Navigator.of(context).pushNamed('/preference'),
+          ),
+        ],
       ),
       body: Container(
         child: _listWidgets.elementAt(
@@ -90,10 +83,6 @@ class _HomeView extends StatelessWidget {
             title: Text('Todo'),
             icon: Icon(Icons.alarm),
           ),
-          BottomNavigationBarItem(
-            title: Text('Setting'),
-            icon: Icon(Icons.settings),
-          )
         ],
       ),
     );

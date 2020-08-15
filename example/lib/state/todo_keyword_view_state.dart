@@ -13,7 +13,7 @@ abstract class TodoKeywordViewState with _$TodoKeywordViewState {
 }
 
 class TodoKeywordViewStateNotifier extends StateNotifier<TodoKeywordViewState> {
-  var _prefUtil = PreferenceUtil();
+  final _prefUtil = PreferenceUtil();
 
   TodoKeywordViewStateNotifier() : super(const TodoKeywordViewState()) {
     init();

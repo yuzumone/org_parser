@@ -19,8 +19,8 @@ abstract class HomeViewState with _$HomeViewState {
 }
 
 class HomeViewStateNotifier extends StateNotifier<HomeViewState> {
-  var _prefUtil = PreferenceUtil();
-  var _repository = FileRepository();
+  final _prefUtil = PreferenceUtil();
+  final _repository = FileRepository();
 
   HomeViewStateNotifier() : super(const HomeViewState()) {
     init();

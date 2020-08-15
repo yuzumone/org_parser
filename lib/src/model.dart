@@ -7,7 +7,7 @@ class OrgFile {
 
   @override
   String toString() {
-    return "headlines: $headlines";
+    return 'headlines: $headlines';
   }
 }
 
@@ -25,10 +25,10 @@ class Headline {
 
   Headline(this.level, this.title, this.chunks, this.raw);
 
-  get isTodo => keyword != null;
+  bool get isTodo => keyword != null;
 
   @override
   String toString() {
-    return "level: $level, title: $title";
+    return 'level: $level, title: $title';
   }
 }

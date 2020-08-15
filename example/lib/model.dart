@@ -6,7 +6,7 @@ class File {
 
   File(this.url, this.org);
 
-  get name {
+  String get name {
     var regex = RegExp(r'^.*/(.*?)(\?.+)?$');
     return regex.firstMatch(url).group(1);
   }

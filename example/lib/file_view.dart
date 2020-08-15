@@ -108,14 +108,14 @@ class _HeadlineView extends StatelessWidget {
                 height: 4.0,
               ),
               Visibility(
-                child: Text("Sheduled: ${headline.scheduled}"),
+                child: Text('Sheduled: ${headline.scheduled}'),
                 visible: headline.scheduled != null,
               ),
               SizedBox(
                 height: 4.0,
               ),
               Visibility(
-                child: Text("Deadline: ${headline.deadline}"),
+                child: Text('Deadline: ${headline.deadline}'),
                 visible: headline.deadline != null,
               )
             ],

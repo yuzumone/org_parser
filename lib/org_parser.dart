@@ -32,7 +32,7 @@ class OrgParser {
   OrgParser(this.lines, this.keywords);
 
   Future<OrgFile> parse() async {
-    List<Headline> headlines = [];
+    var headlines = <Headline>[];
     await for (List<String> chunks in linesToChunks(lines)) {
       Headline headline;
       headline = parseHeadline(chunks);
@@ -47,7 +47,7 @@ class OrgParser {
   }
 
   Stream<List<String>> linesToChunks(List<String> lines) async* {
-    List<String> chunk = [];
+    var chunk = <String>[];
     for (var l in lines) {
       if (chunkRegex.hasMatch(l) && chunk.isNotEmpty) {
         yield chunk;

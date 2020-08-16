@@ -30,7 +30,7 @@ class FileRepository {
 
   Future<List<File>> getWebFiles(
       List<String> urls, List<String> keywords) async {
-    var files = [];
+    var files = <File>[];
     for (var url in urls) {
       var res = await client.get(url);
       if (res.statusCode < 300) {

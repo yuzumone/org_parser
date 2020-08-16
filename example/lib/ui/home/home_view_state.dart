@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:org_parser_example/data/repository/file_repository.dart';
+import 'package:org_parser_example/data/repository/preference_repository.dart';
+import 'package:org_parser_example/data/model/file.dart';
 import 'package:state_notifier/state_notifier.dart';
-import 'package:org_parser_example/model.dart';
-import 'package:org_parser_example/repository.dart';
-import 'package:org_parser_example/preference_utils.dart';
 
 part 'home_view_state.freezed.dart';
 
@@ -19,7 +19,7 @@ abstract class HomeViewState with _$HomeViewState {
 }
 
 class HomeViewStateNotifier extends StateNotifier<HomeViewState> {
-  final _prefUtil = PreferenceUtil();
+  final _prefUtil = PreferenceRepository();
   final _repository = FileRepository();
 
   HomeViewStateNotifier() : super(const HomeViewState()) {

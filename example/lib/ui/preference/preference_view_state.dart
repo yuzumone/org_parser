@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_notifier/state_notifier.dart';
-import 'package:org_parser_example/preference_utils.dart';
 import 'package:org_parser_example/data/model/preference_view_type.dart';
+import 'package:org_parser_example/data/repository/preference_repository.dart';
+import 'package:state_notifier/state_notifier.dart';
 
 part 'preference_view_state.freezed.dart';
 
@@ -17,7 +17,7 @@ abstract class PreferenceViewState with _$PreferenceViewState {
 }
 
 class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState> {
-  final _prefUtil = PreferenceUtil();
+  final _prefUtil = PreferenceRepository();
 
   PreferenceViewStateNotifier() : super(const PreferenceViewState()) {
     init();

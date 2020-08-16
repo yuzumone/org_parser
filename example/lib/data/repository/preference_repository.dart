@@ -1,11 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferenceUtil {
+class PreferenceRepository {
   static const ARG_URLS = 'urls';
   static const ARG_TODO_KEYWORDS = 'todo_keywords';
   static const ARG_DONE_KEYWORDS = 'done_keywords';
 
-  PreferenceUtil();
+  PreferenceRepository();
 
   Future<Preference> getPreference() async {
     var prefs = await SharedPreferences.getInstance();

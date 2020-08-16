@@ -2,8 +2,7 @@ import 'dart:convert' show utf8;
 import 'package:http/http.dart' as http;
 import 'package:http_retry/http_retry.dart';
 import 'package:org_parser/org_parser.dart';
-
-import 'model.dart';
+import 'package:org_parser_example/data/model/file.dart';
 
 class FileRepository {
   RetryClient client;

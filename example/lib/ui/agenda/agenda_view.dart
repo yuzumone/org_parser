@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:org_parser_example/data/model/file.dart';
+import 'package:org_parser_example/ui/detail/detail_view.dart';
+import 'package:org_parser_example/ui/home/home_view_state.dart';
 import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
-
-import 'package:org_parser_example/state/home_view_state.dart';
-import 'package:org_parser_example/model.dart';
-import 'detail_view.dart';
 
 class AgendaView extends StatelessWidget {
   @override

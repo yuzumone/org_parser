@@ -16,15 +16,21 @@ abstract class PreferenceViewState with _$PreferenceViewState {
   }) = _PreferenceViewState;
 }
 
-class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState> {
-  final _prefUtil = PreferenceRepository();
+class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState>
+    with LocatorMixin {
+  PreferenceRepository get _preferenceRepository =>
+      read<PreferenceRepository>();
 
-  PreferenceViewStateNotifier() : super(const PreferenceViewState()) {
+  PreferenceViewStateNotifier() : super(const PreferenceViewState());
+
+  @override
+  void initState() {
+    super.initState();
     init();
   }
 
   Future<void> init() async {
-    var _pref = await _prefUtil.getPreference();
+    var _pref = await _preferenceRepository.getPreference();
     state = state.copyWith(
       urls: _pref.urls,
       todoKeywords: _pref.todoKeywords,
@@ -38,16 +44,16 @@ class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState> {
 
   void setUrls(List<String> urls) {
     state = state.copyWith(urls: urls);
-    _prefUtil.setUrls(urls);
+    _preferenceRepository.setUrls(urls);
   }
 
   void setTodoKeywords(List<String> keywords) {
     state = state.copyWith(todoKeywords: keywords);
-    _prefUtil.setTodoKeywords(keywords);
+    _preferenceRepository.setTodoKeywords(keywords);
   }
 
   void setDoneKeywords(List<String> keywords) {
     state = state.copyWith(doneKeywords: keywords);
-    _prefUtil.setDoneKeywords(keywords);
+    _preferenceRepository.setDoneKeywords(keywords);
   }
 }

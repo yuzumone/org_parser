@@ -18,18 +18,24 @@ abstract class HomeViewState with _$HomeViewState {
   }) = _HomeViewState;
 }
 
-class HomeViewStateNotifier extends StateNotifier<HomeViewState> {
-  final _prefUtil = PreferenceRepository();
-  final _repository = FileRepository();
+class HomeViewStateNotifier extends StateNotifier<HomeViewState>
+    with LocatorMixin {
+  PreferenceRepository get _preferenceRepository =>
+      read<PreferenceRepository>();
+  FileRepository get _fileRepository => read<FileRepository>();
 
-  HomeViewStateNotifier() : super(const HomeViewState()) {
+  HomeViewStateNotifier() : super(const HomeViewState());
+
+  @override
+  void initState() {
+    super.initState();
     init();
   }
 
   Future<void> init() async {
-    var _pref = await _prefUtil.getPreference();
+    var _pref = await _preferenceRepository.getPreference();
     var _keywords = _pref.todoKeywords + _pref.doneKeywords;
-    var _files = await _repository.getWebFiles(_pref.urls, _keywords);
+    var _files = await _fileRepository.getWebFiles(_pref.urls, _keywords);
     state = state.copyWith(
       files: _files,
       todoKeywords: _pref.todoKeywords,

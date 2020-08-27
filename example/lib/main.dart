@@ -39,6 +39,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blue,
+      ),
       routes: <String, WidgetBuilder>{
         '/': (_) => StateNotifierProvider<HomeViewStateNotifier, HomeViewState>(
               create: (_) => HomeViewStateNotifier(),

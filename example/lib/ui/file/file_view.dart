@@ -100,8 +100,13 @@ class _HeadlineView extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                    color: _getTextColor(
-                        headline.keyword, todoKeywords, doneKeywords)),
+                  color: _getTextColor(
+                    context,
+                    headline.keyword,
+                    todoKeywords,
+                    doneKeywords,
+                  ),
+                ),
               ),
               SizedBox(
                 height: 4.0,
@@ -134,13 +139,14 @@ class _HeadlineView extends StatelessWidget {
     );
   }
 
-  Color _getTextColor(String keyword, List<String> todos, List<String> dones) {
+  Color _getTextColor(BuildContext context, String keyword, List<String> todos,
+      List<String> dones) {
     if (todos.contains(keyword)) {
       return Colors.red;
     } else if (dones.contains(keyword)) {
       return Colors.green;
     } else {
-      return Colors.black;
+      return Theme.of(context).textTheme.bodyText1.color;
     }
   }
 }

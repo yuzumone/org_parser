@@ -32,7 +32,6 @@ class HomeView extends StatelessWidget {
         currentIndex:
             context.select<HomeViewState, int>((state) => state.pageIndex),
         onTap: (index) => context.read<HomeViewStateNotifier>().setIndex(index),
-        unselectedItemColor: Colors.black54,
         selectedItemColor: Colors.blue,
         items: [
           BottomNavigationBarItem(

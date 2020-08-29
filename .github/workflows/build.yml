@@ -1,0 +1,29 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: pub get
+        run: flutter pub get
+      - name: build apk
+        run: cd example && flutter build apk --build-number ${GITHUB_RUN_NUMBER}
+      - name: deploygate
+        run: |
+          curl \
+          -H "Authorization: token ${{secrets.DEPLOYGATE_API_KEY}}" \
+          -F "file=@example/build/app/outputs/flutter-apk/app-release.apk" \
+          -F "message=${{GITHUB_RUN_NUMBER}}" \
+          "https://deploygate.com/api/users/yuzumone/apps"

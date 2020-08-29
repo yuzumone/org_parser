@@ -25,5 +25,4 @@ jobs:
           curl \
           -H "Authorization: token ${{secrets.DEPLOYGATE_API_KEY}}" \
           -F "file=@example/build/app/outputs/flutter-apk/app-release.apk" \
-          -F "message=${{GITHUB_RUN_NUMBER}}" \
           "https://deploygate.com/api/users/yuzumone/apps"

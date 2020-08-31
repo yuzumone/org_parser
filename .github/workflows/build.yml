@@ -18,6 +18,11 @@ jobs:
           channel: 'stable'
       - name: pub get
         run: flutter pub get
+      - run: echo "${{secrets.ANDROID_RELEASE_BASE64_KEY}}" | base64 -d > ./example/keystore.jks
+      - run: echo "keyAlias=keystore" >> example/android/key.properties
+      - run: echo "keyPassword=${{secrets.ANDROID_RELEASE_KEY_PASSWORD}}" >> example/android/key.properties
+      - run: echo "storeFile=`pwd`/example/keystore.jks" >> example/android/key.properties
+      - run: echo "storePassword=${{secrets.ANDROID_RELEASE_STORE_PASSWORD}}" >> example/android/key.properties
       - name: build apk
         run: cd example && flutter build apk --build-number ${GITHUB_RUN_NUMBER}
       - name: deploygate

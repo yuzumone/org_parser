@@ -1,3 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="net.example.org_parser">
+          package="net.example.org_parser">
+  <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

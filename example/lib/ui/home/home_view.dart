@@ -35,15 +35,15 @@ class HomeView extends StatelessWidget {
         selectedItemColor: Colors.blue,
         items: [
           BottomNavigationBarItem(
-            title: Text('Files'),
+            label: 'Files',
             icon: Icon(Icons.insert_drive_file),
           ),
           BottomNavigationBarItem(
-            title: Text('Agenda'),
+            label: 'Agenda',
             icon: Icon(Icons.calendar_today),
           ),
           BottomNavigationBarItem(
-            title: Text('Todo'),
+            label: 'Todo',
             icon: Icon(Icons.alarm),
           ),
         ],

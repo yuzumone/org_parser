@@ -9,6 +9,7 @@ part of 'home_view_state.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$HomeViewStateTearOff {
   const _$HomeViewStateTearOff();
 
@@ -29,9 +30,11 @@ class _$HomeViewStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $HomeViewState = _$HomeViewStateTearOff();
 
+/// @nodoc
 mixin _$HomeViewState {
   int get pageIndex;
   List<File> get files;
@@ -42,6 +45,7 @@ mixin _$HomeViewState {
   $HomeViewStateCopyWith<HomeViewState> get copyWith;
 }
 
+/// @nodoc
 abstract class $HomeViewStateCopyWith<$Res> {
   factory $HomeViewStateCopyWith(
           HomeViewState value, $Res Function(HomeViewState) then) =
@@ -54,6 +58,7 @@ abstract class $HomeViewStateCopyWith<$Res> {
       List<String> doneKeywords});
 }
 
+/// @nodoc
 class _$HomeViewStateCopyWithImpl<$Res>
     implements $HomeViewStateCopyWith<$Res> {
   _$HomeViewStateCopyWithImpl(this._value, this._then);
@@ -84,6 +89,7 @@ class _$HomeViewStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$HomeViewStateCopyWith<$Res>
     implements $HomeViewStateCopyWith<$Res> {
   factory _$HomeViewStateCopyWith(
@@ -98,6 +104,7 @@ abstract class _$HomeViewStateCopyWith<$Res>
       List<String> doneKeywords});
 }
 
+/// @nodoc
 class __$HomeViewStateCopyWithImpl<$Res>
     extends _$HomeViewStateCopyWithImpl<$Res>
     implements _$HomeViewStateCopyWith<$Res> {
@@ -130,6 +137,7 @@ class __$HomeViewStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
   const _$_HomeViewState(
       {this.pageIndex = 0,

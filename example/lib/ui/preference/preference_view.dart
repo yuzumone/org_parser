@@ -79,6 +79,13 @@ Future<String> _buildInputDialog(BuildContext context, String title) async {
 }
 
 class _MainPreferenceView extends StatelessWidget {
+  static const fontFaces = [
+    'Myrica',
+    'Cica',
+    'SourceHanCodeJP',
+    'HackGen',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -111,6 +118,25 @@ class _MainPreferenceView extends StatelessWidget {
                   .setViewType(PreferenceViewType.Done);
             },
           ),
+          ListTile(
+            title: Text('Font face'),
+            trailing: DropdownButton(
+              value: context.select<PreferenceViewState, String>(
+                  (state) => state.fontFace),
+              onChanged: (String newValue) {
+                context
+                    .read<PreferenceViewStateNotifier>()
+                    .setFontFace(newValue);
+              },
+              items: fontFaces
+                  .map<DropdownMenuItem<String>>(
+                      (e) => DropdownMenuItem<String>(
+                            value: e,
+                            child: Text(e),
+                          ))
+                  .toList(),
+            ),
+          )
         ],
       ),
     );

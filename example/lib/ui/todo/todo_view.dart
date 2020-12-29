@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:org_parser_example/data/model/file.dart';
 import 'package:org_parser_example/ui/detail/detail_view.dart';
+import 'package:org_parser_example/ui/detail/detail_view_state.dart';
 import 'package:org_parser_example/ui/home/home_view_state.dart';
 import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
@@ -45,8 +47,10 @@ class TodoView extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailView(
-              headline: headline,
+            builder: (context) =>
+                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
+              create: (_) => DetailViewStateNotifier(),
+              child: DetailView(headline: headline),
             ),
           ),
         );

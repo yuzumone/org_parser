@@ -4,6 +4,7 @@ class PreferenceRepository {
   static const ARG_URLS = 'urls';
   static const ARG_TODO_KEYWORDS = 'todo_keywords';
   static const ARG_DONE_KEYWORDS = 'done_keywords';
+  static const ARG_FONT_FACE = 'font_face';
 
   PreferenceRepository();
 
@@ -12,7 +13,8 @@ class PreferenceRepository {
     var urls = prefs.getStringList(ARG_URLS) ?? [];
     var todoKeywords = prefs.getStringList(ARG_TODO_KEYWORDS) ?? ['TODO'];
     var doneKeywords = prefs.getStringList(ARG_DONE_KEYWORDS) ?? ['DONE'];
-    return Preference(urls, todoKeywords, doneKeywords);
+    var fontFace = prefs.getString(ARG_FONT_FACE) ?? 'Myrica';
+    return Preference(urls, todoKeywords, doneKeywords, fontFace);
   }
 
   void setUrls(List<String> urls) async {
@@ -29,11 +31,17 @@ class PreferenceRepository {
     var prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(ARG_DONE_KEYWORDS, doneKeywords);
   }
+
+  void setFontFace(String fontFace) async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.setString(ARG_FONT_FACE, fontFace);
+  }
 }
 
 class Preference {
   List<String> urls;
   List<String> todoKeywords;
   List<String> doneKeywords;
-  Preference(this.urls, this.todoKeywords, this.doneKeywords);
+  String fontFace;
+  Preference(this.urls, this.todoKeywords, this.doneKeywords, this.fontFace);
 }

@@ -9,6 +9,7 @@ part of 'preference_view_state.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PreferenceViewStateTearOff {
   const _$PreferenceViewStateTearOff();
 
@@ -17,28 +18,34 @@ class _$PreferenceViewStateTearOff {
       {dynamic viewType = PreferenceViewType.Main,
       List<String> urls = const [],
       List<String> todoKeywords = const [],
-      List<String> doneKeywords = const []}) {
+      List<String> doneKeywords = const [],
+      String fontFace = 'Myrica'}) {
     return _PreferenceViewState(
       viewType: viewType,
       urls: urls,
       todoKeywords: todoKeywords,
       doneKeywords: doneKeywords,
+      fontFace: fontFace,
     );
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PreferenceViewState = _$PreferenceViewStateTearOff();
 
+/// @nodoc
 mixin _$PreferenceViewState {
   dynamic get viewType;
   List<String> get urls;
   List<String> get todoKeywords;
   List<String> get doneKeywords;
+  String get fontFace;
 
   $PreferenceViewStateCopyWith<PreferenceViewState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PreferenceViewStateCopyWith<$Res> {
   factory $PreferenceViewStateCopyWith(
           PreferenceViewState value, $Res Function(PreferenceViewState) then) =
@@ -47,9 +54,11 @@ abstract class $PreferenceViewStateCopyWith<$Res> {
       {dynamic viewType,
       List<String> urls,
       List<String> todoKeywords,
-      List<String> doneKeywords});
+      List<String> doneKeywords,
+      String fontFace});
 }
 
+/// @nodoc
 class _$PreferenceViewStateCopyWithImpl<$Res>
     implements $PreferenceViewStateCopyWith<$Res> {
   _$PreferenceViewStateCopyWithImpl(this._value, this._then);
@@ -64,6 +73,7 @@ class _$PreferenceViewStateCopyWithImpl<$Res>
     Object urls = freezed,
     Object todoKeywords = freezed,
     Object doneKeywords = freezed,
+    Object fontFace = freezed,
   }) {
     return _then(_value.copyWith(
       viewType: viewType == freezed ? _value.viewType : viewType as dynamic,
@@ -74,10 +84,12 @@ class _$PreferenceViewStateCopyWithImpl<$Res>
       doneKeywords: doneKeywords == freezed
           ? _value.doneKeywords
           : doneKeywords as List<String>,
+      fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
     ));
   }
 }
 
+/// @nodoc
 abstract class _$PreferenceViewStateCopyWith<$Res>
     implements $PreferenceViewStateCopyWith<$Res> {
   factory _$PreferenceViewStateCopyWith(_PreferenceViewState value,
@@ -88,9 +100,11 @@ abstract class _$PreferenceViewStateCopyWith<$Res>
       {dynamic viewType,
       List<String> urls,
       List<String> todoKeywords,
-      List<String> doneKeywords});
+      List<String> doneKeywords,
+      String fontFace});
 }
 
+/// @nodoc
 class __$PreferenceViewStateCopyWithImpl<$Res>
     extends _$PreferenceViewStateCopyWithImpl<$Res>
     implements _$PreferenceViewStateCopyWith<$Res> {
@@ -107,6 +121,7 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
     Object urls = freezed,
     Object todoKeywords = freezed,
     Object doneKeywords = freezed,
+    Object fontFace = freezed,
   }) {
     return _then(_PreferenceViewState(
       viewType: viewType == freezed ? _value.viewType : viewType,
@@ -117,10 +132,12 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
       doneKeywords: doneKeywords == freezed
           ? _value.doneKeywords
           : doneKeywords as List<String>,
+      fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
     ));
   }
 }
 
+/// @nodoc
 class _$_PreferenceViewState
     with DiagnosticableTreeMixin
     implements _PreferenceViewState {
@@ -128,11 +145,13 @@ class _$_PreferenceViewState
       {this.viewType = PreferenceViewType.Main,
       this.urls = const [],
       this.todoKeywords = const [],
-      this.doneKeywords = const []})
+      this.doneKeywords = const [],
+      this.fontFace = 'Myrica'})
       : assert(viewType != null),
         assert(urls != null),
         assert(todoKeywords != null),
-        assert(doneKeywords != null);
+        assert(doneKeywords != null),
+        assert(fontFace != null);
 
   @JsonKey(defaultValue: PreferenceViewType.Main)
   @override
@@ -146,10 +165,13 @@ class _$_PreferenceViewState
   @JsonKey(defaultValue: const [])
   @override
   final List<String> doneKeywords;
+  @JsonKey(defaultValue: 'Myrica')
+  @override
+  final String fontFace;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PreferenceViewState(viewType: $viewType, urls: $urls, todoKeywords: $todoKeywords, doneKeywords: $doneKeywords)';
+    return 'PreferenceViewState(viewType: $viewType, urls: $urls, todoKeywords: $todoKeywords, doneKeywords: $doneKeywords, fontFace: $fontFace)';
   }
 
   @override
@@ -160,7 +182,8 @@ class _$_PreferenceViewState
       ..add(DiagnosticsProperty('viewType', viewType))
       ..add(DiagnosticsProperty('urls', urls))
       ..add(DiagnosticsProperty('todoKeywords', todoKeywords))
-      ..add(DiagnosticsProperty('doneKeywords', doneKeywords));
+      ..add(DiagnosticsProperty('doneKeywords', doneKeywords))
+      ..add(DiagnosticsProperty('fontFace', fontFace));
   }
 
   @override
@@ -177,7 +200,10 @@ class _$_PreferenceViewState
                     .equals(other.todoKeywords, todoKeywords)) &&
             (identical(other.doneKeywords, doneKeywords) ||
                 const DeepCollectionEquality()
-                    .equals(other.doneKeywords, doneKeywords)));
+                    .equals(other.doneKeywords, doneKeywords)) &&
+            (identical(other.fontFace, fontFace) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontFace, fontFace)));
   }
 
   @override
@@ -186,7 +212,8 @@ class _$_PreferenceViewState
       const DeepCollectionEquality().hash(viewType) ^
       const DeepCollectionEquality().hash(urls) ^
       const DeepCollectionEquality().hash(todoKeywords) ^
-      const DeepCollectionEquality().hash(doneKeywords);
+      const DeepCollectionEquality().hash(doneKeywords) ^
+      const DeepCollectionEquality().hash(fontFace);
 
   @override
   _$PreferenceViewStateCopyWith<_PreferenceViewState> get copyWith =>
@@ -199,7 +226,8 @@ abstract class _PreferenceViewState implements PreferenceViewState {
       {dynamic viewType,
       List<String> urls,
       List<String> todoKeywords,
-      List<String> doneKeywords}) = _$_PreferenceViewState;
+      List<String> doneKeywords,
+      String fontFace}) = _$_PreferenceViewState;
 
   @override
   dynamic get viewType;
@@ -209,6 +237,8 @@ abstract class _PreferenceViewState implements PreferenceViewState {
   List<String> get todoKeywords;
   @override
   List<String> get doneKeywords;
+  @override
+  String get fontFace;
   @override
   _$PreferenceViewStateCopyWith<_PreferenceViewState> get copyWith;
 }

@@ -19,13 +19,15 @@ class _$PreferenceViewStateTearOff {
       List<String> urls = const [],
       List<String> todoKeywords = const [],
       List<String> doneKeywords = const [],
-      String fontFace = 'Myrica'}) {
+      String fontFace = 'Myrica',
+      int fontSize = 16}) {
     return _PreferenceViewState(
       viewType: viewType,
       urls: urls,
       todoKeywords: todoKeywords,
       doneKeywords: doneKeywords,
       fontFace: fontFace,
+      fontSize: fontSize,
     );
   }
 }
@@ -41,6 +43,7 @@ mixin _$PreferenceViewState {
   List<String> get todoKeywords;
   List<String> get doneKeywords;
   String get fontFace;
+  int get fontSize;
 
   $PreferenceViewStateCopyWith<PreferenceViewState> get copyWith;
 }
@@ -55,7 +58,8 @@ abstract class $PreferenceViewStateCopyWith<$Res> {
       List<String> urls,
       List<String> todoKeywords,
       List<String> doneKeywords,
-      String fontFace});
+      String fontFace,
+      int fontSize});
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$PreferenceViewStateCopyWithImpl<$Res>
     Object todoKeywords = freezed,
     Object doneKeywords = freezed,
     Object fontFace = freezed,
+    Object fontSize = freezed,
   }) {
     return _then(_value.copyWith(
       viewType: viewType == freezed ? _value.viewType : viewType as dynamic,
@@ -85,6 +90,7 @@ class _$PreferenceViewStateCopyWithImpl<$Res>
           ? _value.doneKeywords
           : doneKeywords as List<String>,
       fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
+      fontSize: fontSize == freezed ? _value.fontSize : fontSize as int,
     ));
   }
 }
@@ -101,7 +107,8 @@ abstract class _$PreferenceViewStateCopyWith<$Res>
       List<String> urls,
       List<String> todoKeywords,
       List<String> doneKeywords,
-      String fontFace});
+      String fontFace,
+      int fontSize});
 }
 
 /// @nodoc
@@ -122,6 +129,7 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
     Object todoKeywords = freezed,
     Object doneKeywords = freezed,
     Object fontFace = freezed,
+    Object fontSize = freezed,
   }) {
     return _then(_PreferenceViewState(
       viewType: viewType == freezed ? _value.viewType : viewType,
@@ -133,6 +141,7 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
           ? _value.doneKeywords
           : doneKeywords as List<String>,
       fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
+      fontSize: fontSize == freezed ? _value.fontSize : fontSize as int,
     ));
   }
 }
@@ -146,12 +155,14 @@ class _$_PreferenceViewState
       this.urls = const [],
       this.todoKeywords = const [],
       this.doneKeywords = const [],
-      this.fontFace = 'Myrica'})
+      this.fontFace = 'Myrica',
+      this.fontSize = 16})
       : assert(viewType != null),
         assert(urls != null),
         assert(todoKeywords != null),
         assert(doneKeywords != null),
-        assert(fontFace != null);
+        assert(fontFace != null),
+        assert(fontSize != null);
 
   @JsonKey(defaultValue: PreferenceViewType.Main)
   @override
@@ -168,10 +179,13 @@ class _$_PreferenceViewState
   @JsonKey(defaultValue: 'Myrica')
   @override
   final String fontFace;
+  @JsonKey(defaultValue: 16)
+  @override
+  final int fontSize;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PreferenceViewState(viewType: $viewType, urls: $urls, todoKeywords: $todoKeywords, doneKeywords: $doneKeywords, fontFace: $fontFace)';
+    return 'PreferenceViewState(viewType: $viewType, urls: $urls, todoKeywords: $todoKeywords, doneKeywords: $doneKeywords, fontFace: $fontFace, fontSize: $fontSize)';
   }
 
   @override
@@ -183,7 +197,8 @@ class _$_PreferenceViewState
       ..add(DiagnosticsProperty('urls', urls))
       ..add(DiagnosticsProperty('todoKeywords', todoKeywords))
       ..add(DiagnosticsProperty('doneKeywords', doneKeywords))
-      ..add(DiagnosticsProperty('fontFace', fontFace));
+      ..add(DiagnosticsProperty('fontFace', fontFace))
+      ..add(DiagnosticsProperty('fontSize', fontSize));
   }
 
   @override
@@ -203,7 +218,10 @@ class _$_PreferenceViewState
                     .equals(other.doneKeywords, doneKeywords)) &&
             (identical(other.fontFace, fontFace) ||
                 const DeepCollectionEquality()
-                    .equals(other.fontFace, fontFace)));
+                    .equals(other.fontFace, fontFace)) &&
+            (identical(other.fontSize, fontSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontSize, fontSize)));
   }
 
   @override
@@ -213,7 +231,8 @@ class _$_PreferenceViewState
       const DeepCollectionEquality().hash(urls) ^
       const DeepCollectionEquality().hash(todoKeywords) ^
       const DeepCollectionEquality().hash(doneKeywords) ^
-      const DeepCollectionEquality().hash(fontFace);
+      const DeepCollectionEquality().hash(fontFace) ^
+      const DeepCollectionEquality().hash(fontSize);
 
   @override
   _$PreferenceViewStateCopyWith<_PreferenceViewState> get copyWith =>
@@ -227,7 +246,8 @@ abstract class _PreferenceViewState implements PreferenceViewState {
       List<String> urls,
       List<String> todoKeywords,
       List<String> doneKeywords,
-      String fontFace}) = _$_PreferenceViewState;
+      String fontFace,
+      int fontSize}) = _$_PreferenceViewState;
 
   @override
   dynamic get viewType;
@@ -239,6 +259,8 @@ abstract class _PreferenceViewState implements PreferenceViewState {
   List<String> get doneKeywords;
   @override
   String get fontFace;
+  @override
+  int get fontSize;
   @override
   _$PreferenceViewStateCopyWith<_PreferenceViewState> get copyWith;
 }

@@ -85,6 +85,23 @@ class _MainPreferenceView extends StatelessWidget {
     'SourceHanCodeJP',
     'HackGen',
   ];
+  static const fontSize = [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +153,27 @@ class _MainPreferenceView extends StatelessWidget {
                           ))
                   .toList(),
             ),
-          )
+          ),
+          ListTile(
+            title: Text('Font size'),
+            trailing: DropdownButton(
+              value: context
+                  .select<PreferenceViewState, int>((state) => state.fontSize)
+                  .toString(),
+              onChanged: (String newValue) {
+                context
+                    .read<PreferenceViewStateNotifier>()
+                    .setFontSize(int.parse(newValue));
+              },
+              items: fontSize
+                  .map<DropdownMenuItem<String>>(
+                      (e) => DropdownMenuItem<String>(
+                            value: e.toString(),
+                            child: Text(e.toString()),
+                          ))
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );

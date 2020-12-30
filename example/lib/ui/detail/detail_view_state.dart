@@ -9,6 +9,7 @@ part 'detail_view_state.freezed.dart';
 abstract class DetailViewState with _$DetailViewState {
   const factory DetailViewState({
     @Default('Myrica') String fontFace,
+    @Default(16) int fontSize,
   }) = _DetailViewState;
 }
 
@@ -29,6 +30,7 @@ class DetailViewStateNotifier extends StateNotifier<DetailViewState>
     var _pref = await _preferenceRepository.getPreference();
     state = state.copyWith(
       fontFace: _pref.fontFace,
+      fontSize: _pref.fontSize,
     );
   }
 }

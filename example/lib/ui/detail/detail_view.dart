@@ -12,6 +12,8 @@ class DetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     var fontFace =
         context.select<DetailViewState, String>((state) => state.fontFace);
+    var fontSize =
+        context.select<DetailViewState, int>((state) => state.fontSize);
     return Scaffold(
       appBar: AppBar(),
       body: Container(
@@ -23,7 +25,7 @@ class DetailView extends StatelessWidget {
               child: Text(
                 headline.title,
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: fontSize * 1.2,
                   fontFamily: fontFace,
                 ),
               ),
@@ -34,7 +36,10 @@ class DetailView extends StatelessWidget {
             Flexible(
               child: Text(
                 headline.chunks.skip(1).join('\n'),
-                style: TextStyle(fontFamily: fontFace),
+                style: TextStyle(
+                  fontSize: fontSize.toDouble(),
+                  fontFamily: fontFace,
+                ),
               ),
             ),
           ],

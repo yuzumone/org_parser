@@ -14,6 +14,7 @@ abstract class PreferenceViewState with _$PreferenceViewState {
     @Default([]) List<String> todoKeywords,
     @Default([]) List<String> doneKeywords,
     @Default('Myrica') String fontFace,
+    @Default(16) int fontSize,
   }) = _PreferenceViewState;
 }
 
@@ -37,6 +38,7 @@ class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState>
       todoKeywords: _pref.todoKeywords,
       doneKeywords: _pref.doneKeywords,
       fontFace: _pref.fontFace,
+      fontSize: _pref.fontSize,
     );
   }
 
@@ -62,5 +64,10 @@ class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState>
   void setFontFace(String fontFace) {
     state = state.copyWith(fontFace: fontFace);
     _preferenceRepository.setFontFace(fontFace);
+  }
+
+  void setFontSize(int fontSize) {
+    state = state.copyWith(fontSize: fontSize);
+    _preferenceRepository.setFontSize(fontSize);
   }
 }

@@ -14,9 +14,10 @@ class _$DetailViewStateTearOff {
   const _$DetailViewStateTearOff();
 
 // ignore: unused_element
-  _DetailViewState call({String fontFace = 'Myrica'}) {
+  _DetailViewState call({String fontFace = 'Myrica', int fontSize = 16}) {
     return _DetailViewState(
       fontFace: fontFace,
+      fontSize: fontSize,
     );
   }
 }
@@ -28,6 +29,7 @@ const $DetailViewState = _$DetailViewStateTearOff();
 /// @nodoc
 mixin _$DetailViewState {
   String get fontFace;
+  int get fontSize;
 
   $DetailViewStateCopyWith<DetailViewState> get copyWith;
 }
@@ -37,7 +39,7 @@ abstract class $DetailViewStateCopyWith<$Res> {
   factory $DetailViewStateCopyWith(
           DetailViewState value, $Res Function(DetailViewState) then) =
       _$DetailViewStateCopyWithImpl<$Res>;
-  $Res call({String fontFace});
+  $Res call({String fontFace, int fontSize});
 }
 
 /// @nodoc
@@ -52,9 +54,11 @@ class _$DetailViewStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object fontFace = freezed,
+    Object fontSize = freezed,
   }) {
     return _then(_value.copyWith(
       fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
+      fontSize: fontSize == freezed ? _value.fontSize : fontSize as int,
     ));
   }
 }
@@ -66,7 +70,7 @@ abstract class _$DetailViewStateCopyWith<$Res>
           _DetailViewState value, $Res Function(_DetailViewState) then) =
       __$DetailViewStateCopyWithImpl<$Res>;
   @override
-  $Res call({String fontFace});
+  $Res call({String fontFace, int fontSize});
 }
 
 /// @nodoc
@@ -83,9 +87,11 @@ class __$DetailViewStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object fontFace = freezed,
+    Object fontSize = freezed,
   }) {
     return _then(_DetailViewState(
       fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
+      fontSize: fontSize == freezed ? _value.fontSize : fontSize as int,
     ));
   }
 }
@@ -94,16 +100,20 @@ class __$DetailViewStateCopyWithImpl<$Res>
 class _$_DetailViewState
     with DiagnosticableTreeMixin
     implements _DetailViewState {
-  const _$_DetailViewState({this.fontFace = 'Myrica'})
-      : assert(fontFace != null);
+  const _$_DetailViewState({this.fontFace = 'Myrica', this.fontSize = 16})
+      : assert(fontFace != null),
+        assert(fontSize != null);
 
   @JsonKey(defaultValue: 'Myrica')
   @override
   final String fontFace;
+  @JsonKey(defaultValue: 16)
+  @override
+  final int fontSize;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DetailViewState(fontFace: $fontFace)';
+    return 'DetailViewState(fontFace: $fontFace, fontSize: $fontSize)';
   }
 
   @override
@@ -111,7 +121,8 @@ class _$_DetailViewState
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DetailViewState'))
-      ..add(DiagnosticsProperty('fontFace', fontFace));
+      ..add(DiagnosticsProperty('fontFace', fontFace))
+      ..add(DiagnosticsProperty('fontSize', fontSize));
   }
 
   @override
@@ -120,12 +131,17 @@ class _$_DetailViewState
         (other is _DetailViewState &&
             (identical(other.fontFace, fontFace) ||
                 const DeepCollectionEquality()
-                    .equals(other.fontFace, fontFace)));
+                    .equals(other.fontFace, fontFace)) &&
+            (identical(other.fontSize, fontSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.fontSize, fontSize)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(fontFace);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(fontFace) ^
+      const DeepCollectionEquality().hash(fontSize);
 
   @override
   _$DetailViewStateCopyWith<_DetailViewState> get copyWith =>
@@ -133,10 +149,13 @@ class _$_DetailViewState
 }
 
 abstract class _DetailViewState implements DetailViewState {
-  const factory _DetailViewState({String fontFace}) = _$_DetailViewState;
+  const factory _DetailViewState({String fontFace, int fontSize}) =
+      _$_DetailViewState;
 
   @override
   String get fontFace;
+  @override
+  int get fontSize;
   @override
   _$DetailViewStateCopyWith<_DetailViewState> get copyWith;
 }

@@ -20,6 +20,7 @@ dependencies:
   flutter_state_notifier: ^0.6.1
   freezed_annotation:
   flutter_launcher_icons: ^0.8.1
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

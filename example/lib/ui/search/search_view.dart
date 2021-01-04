@@ -21,6 +21,17 @@ class SearchView extends StatelessWidget {
       appBar: AppBar(
         title: TextField(
           textInputAction: TextInputAction.search,
+          autofocus: true,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+          decoration: InputDecoration(
+            hintText: 'Search...',
+            border: InputBorder.none,
+            hintStyle: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           onSubmitted: (value) => context
               .read<SearchViewStateNotifier>()
               .setResult(

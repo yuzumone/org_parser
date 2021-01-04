@@ -27,19 +27,6 @@ class HomeView extends StatelessWidget {
         title: const Text('Org Mobile'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => StateNotifierProvider<
-                    SearchViewStateNotifier, SearchViewState>(
-                  create: (_) => SearchViewStateNotifier(),
-                  child: SearchView(files: files),
-                ),
-              ),
-            ),
-          ),
-          IconButton(
             icon: Icon(Icons.settings),
             onPressed: () => Navigator.of(context).pushNamed('/preference'),
           ),
@@ -47,6 +34,24 @@ class HomeView extends StatelessWidget {
       ),
       body: Container(
         child: _listWidgets.elementAt(pageIndex),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.search,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.blue[300],
+        tooltip: 'Search',
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                StateNotifierProvider<SearchViewStateNotifier, SearchViewState>(
+              create: (_) => SearchViewStateNotifier(),
+              child: SearchView(files: files),
+            ),
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,

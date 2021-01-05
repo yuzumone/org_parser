@@ -19,9 +19,12 @@ class AgendaView extends StatelessWidget {
         .select<HomeViewState, List<String>>((state) => state.todoKeywords);
     var doneKeywords = context
         .select<HomeViewState, List<String>>((state) => state.doneKeywords);
-    var agenda = _getAgendaList(files);
+    var weekDiff =
+        context.select<HomeViewState, int>((state) => state.weekDiff);
     var now = DateTime.now();
-    var start = now.subtract(Duration(days: now.weekday - 1));
+    var basis = now.add(Duration(days: weekDiff * 7));
+    var agenda = _getAgendaList(files, basis);
+    var start = basis.subtract(Duration(days: now.weekday - 1));
     var dates = Iterable<int>.generate(7)
         .map((e) => DateTime(start.year, start.month, start.day + e))
         .toList();
@@ -43,19 +46,20 @@ class AgendaView extends StatelessWidget {
     );
   }
 
-  List<Headline> _getAgendaList(List<File> files) {
+  List<Headline> _getAgendaList(List<File> files, DateTime basis) {
     var list = files
         .expand((x) => x.org.headlines)
-        .where((x) => _checkAgendaHeadline(x))
+        .where((x) => _checkAgendaHeadline(basis, x))
         .toList();
     list.sort((x, y) => x.scheduledDateTime.compareTo(y.scheduledDateTime));
     return list;
   }
 
-  bool _checkAgendaHeadline(Headline headline) {
-    var now = DateTime.now();
-    var start = DateTime(now.year, now.month, now.day - (now.weekday - 1));
-    var end = DateTime(now.year, now.month, now.day + (8 - now.weekday));
+  bool _checkAgendaHeadline(DateTime basis, Headline headline) {
+    var start =
+        DateTime(basis.year, basis.month, basis.day - (basis.weekday - 1));
+    var end =
+        DateTime(basis.year, basis.month, basis.day + (8 - basis.weekday));
     return (headline.isTodo && _checkAgendaDate(headline, start, end));
   }
 

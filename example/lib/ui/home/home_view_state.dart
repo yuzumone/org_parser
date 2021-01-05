@@ -15,6 +15,7 @@ abstract class HomeViewState with _$HomeViewState {
     @Default([]) List<String> urls,
     @Default([]) List<String> todoKeywords,
     @Default([]) List<String> doneKeywords,
+    @Default(0) int weekDiff,
   }) = _HomeViewState;
 }
 
@@ -44,4 +45,9 @@ class HomeViewStateNotifier extends StateNotifier<HomeViewState>
   }
 
   void setIndex(int index) => state = state.copyWith(pageIndex: index);
+
+  void addWeekDiff() => state = state.copyWith(weekDiff: state.weekDiff + 1);
+
+  void subtractWeekDiff() =>
+      state = state.copyWith(weekDiff: state.weekDiff - 1);
 }

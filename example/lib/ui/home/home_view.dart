@@ -26,6 +26,18 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Org Mobile'),
         actions: <Widget>[
+          pageIndex == 1
+              ? IconButton(
+                  icon: Icon(Icons.chevron_left),
+                  onPressed: () =>
+                      context.read<HomeViewStateNotifier>().subtractWeekDiff())
+              : Container(),
+          pageIndex == 1
+              ? IconButton(
+                  icon: Icon(Icons.chevron_right),
+                  onPressed: () =>
+                      context.read<HomeViewStateNotifier>().addWeekDiff())
+              : Container(),
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () => Navigator.of(context).pushNamed('/preference'),

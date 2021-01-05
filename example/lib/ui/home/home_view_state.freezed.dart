@@ -19,13 +19,15 @@ class _$HomeViewStateTearOff {
       List<File> files = const [],
       List<String> urls = const [],
       List<String> todoKeywords = const [],
-      List<String> doneKeywords = const []}) {
+      List<String> doneKeywords = const [],
+      int weekDiff = 0}) {
     return _HomeViewState(
       pageIndex: pageIndex,
       files: files,
       urls: urls,
       todoKeywords: todoKeywords,
       doneKeywords: doneKeywords,
+      weekDiff: weekDiff,
     );
   }
 }
@@ -41,6 +43,7 @@ mixin _$HomeViewState {
   List<String> get urls;
   List<String> get todoKeywords;
   List<String> get doneKeywords;
+  int get weekDiff;
 
   $HomeViewStateCopyWith<HomeViewState> get copyWith;
 }
@@ -55,7 +58,8 @@ abstract class $HomeViewStateCopyWith<$Res> {
       List<File> files,
       List<String> urls,
       List<String> todoKeywords,
-      List<String> doneKeywords});
+      List<String> doneKeywords,
+      int weekDiff});
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$HomeViewStateCopyWithImpl<$Res>
     Object urls = freezed,
     Object todoKeywords = freezed,
     Object doneKeywords = freezed,
+    Object weekDiff = freezed,
   }) {
     return _then(_value.copyWith(
       pageIndex: pageIndex == freezed ? _value.pageIndex : pageIndex as int,
@@ -85,6 +90,7 @@ class _$HomeViewStateCopyWithImpl<$Res>
       doneKeywords: doneKeywords == freezed
           ? _value.doneKeywords
           : doneKeywords as List<String>,
+      weekDiff: weekDiff == freezed ? _value.weekDiff : weekDiff as int,
     ));
   }
 }
@@ -101,7 +107,8 @@ abstract class _$HomeViewStateCopyWith<$Res>
       List<File> files,
       List<String> urls,
       List<String> todoKeywords,
-      List<String> doneKeywords});
+      List<String> doneKeywords,
+      int weekDiff});
 }
 
 /// @nodoc
@@ -122,6 +129,7 @@ class __$HomeViewStateCopyWithImpl<$Res>
     Object urls = freezed,
     Object todoKeywords = freezed,
     Object doneKeywords = freezed,
+    Object weekDiff = freezed,
   }) {
     return _then(_HomeViewState(
       pageIndex: pageIndex == freezed ? _value.pageIndex : pageIndex as int,
@@ -133,6 +141,7 @@ class __$HomeViewStateCopyWithImpl<$Res>
       doneKeywords: doneKeywords == freezed
           ? _value.doneKeywords
           : doneKeywords as List<String>,
+      weekDiff: weekDiff == freezed ? _value.weekDiff : weekDiff as int,
     ));
   }
 }
@@ -144,12 +153,14 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
       this.files = const [],
       this.urls = const [],
       this.todoKeywords = const [],
-      this.doneKeywords = const []})
+      this.doneKeywords = const [],
+      this.weekDiff = 0})
       : assert(pageIndex != null),
         assert(files != null),
         assert(urls != null),
         assert(todoKeywords != null),
-        assert(doneKeywords != null);
+        assert(doneKeywords != null),
+        assert(weekDiff != null);
 
   @JsonKey(defaultValue: 0)
   @override
@@ -166,10 +177,13 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
   @JsonKey(defaultValue: const [])
   @override
   final List<String> doneKeywords;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int weekDiff;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeViewState(pageIndex: $pageIndex, files: $files, urls: $urls, todoKeywords: $todoKeywords, doneKeywords: $doneKeywords)';
+    return 'HomeViewState(pageIndex: $pageIndex, files: $files, urls: $urls, todoKeywords: $todoKeywords, doneKeywords: $doneKeywords, weekDiff: $weekDiff)';
   }
 
   @override
@@ -181,7 +195,8 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
       ..add(DiagnosticsProperty('files', files))
       ..add(DiagnosticsProperty('urls', urls))
       ..add(DiagnosticsProperty('todoKeywords', todoKeywords))
-      ..add(DiagnosticsProperty('doneKeywords', doneKeywords));
+      ..add(DiagnosticsProperty('doneKeywords', doneKeywords))
+      ..add(DiagnosticsProperty('weekDiff', weekDiff));
   }
 
   @override
@@ -200,7 +215,10 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
                     .equals(other.todoKeywords, todoKeywords)) &&
             (identical(other.doneKeywords, doneKeywords) ||
                 const DeepCollectionEquality()
-                    .equals(other.doneKeywords, doneKeywords)));
+                    .equals(other.doneKeywords, doneKeywords)) &&
+            (identical(other.weekDiff, weekDiff) ||
+                const DeepCollectionEquality()
+                    .equals(other.weekDiff, weekDiff)));
   }
 
   @override
@@ -210,7 +228,8 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
       const DeepCollectionEquality().hash(files) ^
       const DeepCollectionEquality().hash(urls) ^
       const DeepCollectionEquality().hash(todoKeywords) ^
-      const DeepCollectionEquality().hash(doneKeywords);
+      const DeepCollectionEquality().hash(doneKeywords) ^
+      const DeepCollectionEquality().hash(weekDiff);
 
   @override
   _$HomeViewStateCopyWith<_HomeViewState> get copyWith =>
@@ -223,7 +242,8 @@ abstract class _HomeViewState implements HomeViewState {
       List<File> files,
       List<String> urls,
       List<String> todoKeywords,
-      List<String> doneKeywords}) = _$_HomeViewState;
+      List<String> doneKeywords,
+      int weekDiff}) = _$_HomeViewState;
 
   @override
   int get pageIndex;
@@ -235,6 +255,8 @@ abstract class _HomeViewState implements HomeViewState {
   List<String> get todoKeywords;
   @override
   List<String> get doneKeywords;
+  @override
+  int get weekDiff;
   @override
   _$HomeViewStateCopyWith<_HomeViewState> get copyWith;
 }

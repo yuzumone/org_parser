@@ -24,6 +24,7 @@ class AgendaView extends StatelessWidget {
     var now = DateTime.now();
     var basis = now.add(Duration(days: weekDiff * 7));
     var agenda = _getAgendaList(files, basis);
+    var over = _getOvertimeAgendaList(files, basis);
     var start = basis.subtract(Duration(days: now.weekday - 1));
     var dates = Iterable<int>.generate(7)
         .map((e) => DateTime(start.year, start.month, start.day + e))
@@ -32,6 +33,10 @@ class AgendaView extends StatelessWidget {
     items.add(dates.first);
     dates.skip(1).forEach((x) {
       items.add(x);
+      var diff = now.difference(x);
+      if (0 <= diff.inHours && diff.inHours < 24) {
+        items.addAll(over);
+      }
       agenda.forEach((y) {
         var diff = y.scheduledDateTime.difference(x);
         if (0 <= diff.inHours && diff.inHours < 24) {
@@ -71,6 +76,18 @@ class AgendaView extends StatelessWidget {
     } else {
       return false;
     }
+  }
+
+  List<Headline> _getOvertimeAgendaList(List<File> files, DateTime now) {
+    var today = DateTime(now.year, now.month, now.day);
+    var list = files
+        .expand((x) => x.org.headlines)
+        .where((x) => x.isTodo)
+        .where((x) => x.scheduledDateTime != null)
+        .where((x) => x.scheduledDateTime.isBefore(today))
+        .toList();
+    list.sort((x, y) => x.scheduledDateTime.compareTo(y.scheduledDateTime));
+    return list;
   }
 
   Widget _buildTile(BuildContext context, dynamic item,

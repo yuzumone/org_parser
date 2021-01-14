@@ -24,26 +24,8 @@ class AgendaView extends StatelessWidget {
     var now = DateTime.now();
     var basis = now.add(Duration(days: weekDiff * 7));
     var agenda = _getAgendaList(files, basis);
-    var over = _getOvertimeAgendaList(files, basis);
-    var start = basis.subtract(Duration(days: now.weekday - 1));
-    var dates = Iterable<int>.generate(7)
-        .map((e) => DateTime(start.year, start.month, start.day + e))
-        .toList();
-    var items = <dynamic>[];
-    items.add(dates.first);
-    dates.skip(1).forEach((x) {
-      items.add(x);
-      var diff = now.difference(x);
-      if (0 <= diff.inHours && diff.inHours < 24) {
-        items.addAll(over);
-      }
-      agenda.forEach((y) {
-        var diff = y.scheduledDateTime.difference(x);
-        if (0 <= diff.inHours && diff.inHours < 24) {
-          items.add(y);
-        }
-      });
-    });
+    var over = _getOvertimeAgendaList(files, basis, todoKeywords);
+    var items = _createListItems(now, basis, agenda, over);
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index) =>
@@ -52,42 +34,57 @@ class AgendaView extends StatelessWidget {
   }
 
   List<Headline> _getAgendaList(List<File> files, DateTime basis) {
+    var start =
+        DateTime(basis.year, basis.month, basis.day - (basis.weekday - 1));
+    var end =
+        DateTime(basis.year, basis.month, basis.day + (8 - basis.weekday));
     var list = files
         .expand((x) => x.org.headlines)
-        .where((x) => _checkAgendaHeadline(basis, x))
+        .where((x) => x.isTodo)
+        .where((x) => x.scheduledDateTime != null)
+        .where((x) =>
+            start.isBefore(x.scheduledDateTime) &&
+            end.isAfter(x.scheduledDateTime))
         .toList();
     list.sort((x, y) => x.scheduledDateTime.compareTo(y.scheduledDateTime));
     return list;
   }
 
-  bool _checkAgendaHeadline(DateTime basis, Headline headline) {
-    var start =
-        DateTime(basis.year, basis.month, basis.day - (basis.weekday - 1));
-    var end =
-        DateTime(basis.year, basis.month, basis.day + (8 - basis.weekday));
-    return (headline.isTodo && _checkAgendaDate(headline, start, end));
-  }
-
-  bool _checkAgendaDate(Headline headline, DateTime start, DateTime end) {
-    if (headline.scheduledDateTime != null &&
-        start.isBefore(headline.scheduledDateTime) &&
-        end.isAfter(headline.scheduledDateTime)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  List<Headline> _getOvertimeAgendaList(List<File> files, DateTime now) {
+  List<Headline> _getOvertimeAgendaList(
+      List<File> files, DateTime now, List<String> todoKeywords) {
     var today = DateTime(now.year, now.month, now.day);
     var list = files
         .expand((x) => x.org.headlines)
         .where((x) => x.isTodo)
+        .where((x) => todoKeywords.contains(x.keyword))
         .where((x) => x.scheduledDateTime != null)
         .where((x) => x.scheduledDateTime.isBefore(today))
         .toList();
     list.sort((x, y) => x.scheduledDateTime.compareTo(y.scheduledDateTime));
     return list;
+  }
+
+  List<dynamic> _createListItems(DateTime now, DateTime basis,
+      List<Headline> agendaList, List<Headline> overAgendaList) {
+    var start = basis.subtract(Duration(days: now.weekday - 1));
+    var dates = Iterable<int>.generate(7)
+        .map((e) => DateTime(start.year, start.month, start.day + e))
+        .toList();
+    var items = <dynamic>[];
+    dates.forEach((x) {
+      items.add(x);
+      var diff = now.difference(x);
+      if (0 <= diff.inHours && diff.inHours < 24) {
+        items.addAll(overAgendaList);
+      }
+      agendaList.forEach((y) {
+        var diff = y.scheduledDateTime.difference(x);
+        if (0 <= diff.inHours && diff.inHours < 24) {
+          items.add(y);
+        }
+      });
+    });
+    return items;
   }
 
   Widget _buildTile(BuildContext context, dynamic item,

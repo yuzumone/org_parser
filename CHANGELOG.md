@@ -1,3 +1,5 @@
-## 0.0.1
+## 1.0.0-dev
+- Remove flutter dependence
 
-* TODO: Describe initial release.
+## 0.0.1
+- init

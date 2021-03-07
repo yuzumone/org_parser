@@ -1,23 +1,12 @@
 name: org_parser
 description: org file parser for dart.
-version: 0.0.1
+version: 1.0.0-dev
 author: yuzumone
 homepage: https://github.com/yuzumone/org_parser
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
-dependencies:
-  flutter:
-    sdk: flutter
-
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   test: ^1.6.0
   pedantic: ^1.8.0
-
-flutter:
-  plugin:
-    androidPackage: net.example.org_parser
-    pluginClass: OrgParserPlugin

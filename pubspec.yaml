@@ -1,6 +1,6 @@
 name: org_parser
 description: org file parser for dart.
-version: 0.0.1
+version: 1.0.0-dev
 author: yuzumone
 homepage: https://github.com/yuzumone/org_parser
 

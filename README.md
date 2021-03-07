@@ -1,14 +1,26 @@
 # org_parser
+[![test and lint](https://github.com/yuzumone/org_parser/actions/workflows/test.yml/badge.svg)](https://github.com/yuzumone/org_parser/actions/workflows/test.yml)
 
 org file parser for dart.
 
-## Getting Started
+## Usage
+```dart
+var text = '''
+#+STARTUP: content
+* todos
+** TODO todo1
+** DONE todo2
+DEADLINE: <2020-08-01 Sat> SCHEDULED: <2020-08-01 Sat>
+:LOGBOOK:
+CLOCK: [2020-08-01 Sat 10:00]--[2020-08-01 Sat 10:30] =>  0:30
+:END:
+''';
+var org = await loadOrg(text);
+org.headlines.forEach((x) => print(x.title));
+// todos
+// todo1
+// todo2
+```
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## LICENSE
+MIT

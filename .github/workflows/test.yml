@@ -19,10 +19,10 @@ jobs:
         with:
           channel: 'stable'
       - name: pub get
-        run: flutter pub get
-      - name: dartfmt
-        run: dartfmt -n --set-exit-if-changed .
+        run: dart pub get
+      - name: format
+        run: dart format --set-exit-if-changed .
       - name: analyze
-        run: flutter analyze
+        run: dart analyze lib
       - name: test
-        run: flutter test --verbose
+        run: dart --no-sound-null-safety test test

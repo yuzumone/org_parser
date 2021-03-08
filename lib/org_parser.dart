@@ -34,13 +34,11 @@ class OrgParser {
   Future<OrgFile> parse() async {
     var headlines = <Headline>[];
     await for (List<String> chunks in linesToChunks(lines)) {
-      Headline headline;
+      Headline? headline;
       headline = parseHeadline(chunks);
       if (headline != null) {
         headline = parseTodo(headline);
-        if (headline != null) {
-          headlines.add(headline);
-        }
+        headlines.add(headline);
       }
     }
     return OrgFile(headlines);
@@ -60,11 +58,11 @@ class OrgParser {
     yield chunk;
   }
 
-  Headline parseHeadline(List<String> chunks) {
+  Headline? parseHeadline(List<String> chunks) {
     var heading = chunks[0];
     var match = headlineRegex.firstMatch(heading);
     if (match != null) {
-      var level = match.group(1).length;
+      var level = match.group(1)!.length;
       var title = match.group(2);
       return Headline(level, title, chunks, chunks.join('\n'));
     }
@@ -72,7 +70,7 @@ class OrgParser {
   }
 
   Headline parseTodo(Headline headline) {
-    var todoMatch = todoRegex.firstMatch(headline.title);
+    var todoMatch = todoRegex.firstMatch(headline.title!);
     if (todoMatch != null) {
       var keyword = todoMatch.group(1);
       var name = todoMatch.group(2);
@@ -93,9 +91,9 @@ class OrgParser {
   }
 
   DateTime _parseDateTime(RegExpMatch match) {
-    var year = int.parse(match.group(2));
-    var month = int.parse(match.group(3));
-    var day = int.parse(match.group(4));
+    var year = int.parse(match.group(2)!);
+    var month = int.parse(match.group(3)!);
+    var day = int.parse(match.group(4)!);
     var hour = int.parse(match.group(6) ?? '0');
     var minute = int.parse(match.group(7) ?? '0');
     return DateTime(year, month, day, hour, minute);

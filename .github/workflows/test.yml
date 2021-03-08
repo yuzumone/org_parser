@@ -25,4 +25,4 @@ jobs:
       - name: analyze
         run: dart analyze lib
       - name: test
-        run: dart --no-sound-null-safety test test
+        run: dart test test

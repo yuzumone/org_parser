@@ -13,15 +13,15 @@ class OrgFile {
 
 class Headline {
   int level;
-  String title;
+  String? title;
   List<String> chunks;
   String raw;
-  String keyword;
-  String name;
-  String scheduled;
-  DateTime scheduledDateTime;
-  String deadline;
-  DateTime deadlineDateTime;
+  String? keyword;
+  String? name;
+  String? scheduled;
+  DateTime? scheduledDateTime;
+  String? deadline;
+  DateTime? deadlineDateTime;
 
   Headline(this.level, this.title, this.chunks, this.raw);
 

@@ -63,14 +63,14 @@ class OrgParser {
     var match = headlineRegex.firstMatch(heading);
     if (match != null) {
       var level = match.group(1)!.length;
-      var title = match.group(2);
+      var title = match.group(2)!;
       return Headline(level, title, chunks, chunks.join('\n'));
     }
     return null;
   }
 
   Headline parseTodo(Headline headline) {
-    var todoMatch = todoRegex.firstMatch(headline.title!);
+    var todoMatch = todoRegex.firstMatch(headline.title);
     if (todoMatch != null) {
       var keyword = todoMatch.group(1);
       var name = todoMatch.group(2);

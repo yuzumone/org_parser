@@ -13,7 +13,7 @@ class OrgFile {
 
 class Headline {
   int level;
-  String? title;
+  String title;
   List<String> chunks;
   String raw;
   String? keyword;

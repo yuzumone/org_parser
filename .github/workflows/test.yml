@@ -23,7 +23,7 @@ jobs:
       - name: format
         run: dart format --set-exit-if-changed .
       - name: analyze
-        run: dart analyze lib
+        run: dart analyze
       - name: test
         run: dart test test
       - name: flutter test

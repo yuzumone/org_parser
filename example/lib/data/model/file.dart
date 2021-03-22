@@ -8,6 +8,7 @@ class File {
 
   String get name {
     var regex = RegExp(r'^.*/(.*?)(\?.+)?$');
-    return regex.firstMatch(url).group(1);
+    var firstMatch = regex.firstMatch(url);
+    return firstMatch != null ? firstMatch.group(1)! : url;
   }
 }

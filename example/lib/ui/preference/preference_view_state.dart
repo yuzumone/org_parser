@@ -9,7 +9,7 @@ part 'preference_view_state.freezed.dart';
 @freezed
 abstract class PreferenceViewState with _$PreferenceViewState {
   const factory PreferenceViewState({
-    @Default(PreferenceViewType.Main) viewType,
+    @Default(PreferenceViewType.main) viewType,
     @Default([]) List<String> urls,
     @Default([]) List<String> todoKeywords,
     @Default([]) List<String> doneKeywords,

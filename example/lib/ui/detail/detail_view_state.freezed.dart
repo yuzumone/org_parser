@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'detail_view_state.dart';
 
@@ -9,11 +9,13 @@ part of 'detail_view_state.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$DetailViewStateTearOff {
   const _$DetailViewStateTearOff();
 
-// ignore: unused_element
   _DetailViewState call({String fontFace = 'Myrica', int fontSize = 16}) {
     return _DetailViewState(
       fontFace: fontFace,
@@ -23,15 +25,16 @@ class _$DetailViewStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $DetailViewState = _$DetailViewStateTearOff();
 
 /// @nodoc
 mixin _$DetailViewState {
-  String get fontFace;
-  int get fontSize;
+  String get fontFace => throw _privateConstructorUsedError;
+  int get fontSize => throw _privateConstructorUsedError;
 
-  $DetailViewStateCopyWith<DetailViewState> get copyWith;
+  @JsonKey(ignore: true)
+  $DetailViewStateCopyWith<DetailViewState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -53,12 +56,18 @@ class _$DetailViewStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object fontFace = freezed,
-    Object fontSize = freezed,
+    Object? fontFace = freezed,
+    Object? fontSize = freezed,
   }) {
     return _then(_value.copyWith(
-      fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
-      fontSize: fontSize == freezed ? _value.fontSize : fontSize as int,
+      fontFace: fontFace == freezed
+          ? _value.fontFace
+          : fontFace // ignore: cast_nullable_to_non_nullable
+              as String,
+      fontSize: fontSize == freezed
+          ? _value.fontSize
+          : fontSize // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -86,12 +95,18 @@ class __$DetailViewStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object fontFace = freezed,
-    Object fontSize = freezed,
+    Object? fontFace = freezed,
+    Object? fontSize = freezed,
   }) {
     return _then(_DetailViewState(
-      fontFace: fontFace == freezed ? _value.fontFace : fontFace as String,
-      fontSize: fontSize == freezed ? _value.fontSize : fontSize as int,
+      fontFace: fontFace == freezed
+          ? _value.fontFace
+          : fontFace // ignore: cast_nullable_to_non_nullable
+              as String,
+      fontSize: fontSize == freezed
+          ? _value.fontSize
+          : fontSize // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -100,9 +115,7 @@ class __$DetailViewStateCopyWithImpl<$Res>
 class _$_DetailViewState
     with DiagnosticableTreeMixin
     implements _DetailViewState {
-  const _$_DetailViewState({this.fontFace = 'Myrica', this.fontSize = 16})
-      : assert(fontFace != null),
-        assert(fontSize != null);
+  const _$_DetailViewState({this.fontFace = 'Myrica', this.fontSize = 16});
 
   @JsonKey(defaultValue: 'Myrica')
   @override
@@ -143,6 +156,7 @@ class _$_DetailViewState
       const DeepCollectionEquality().hash(fontFace) ^
       const DeepCollectionEquality().hash(fontSize);
 
+  @JsonKey(ignore: true)
   @override
   _$DetailViewStateCopyWith<_DetailViewState> get copyWith =>
       __$DetailViewStateCopyWithImpl<_DetailViewState>(this, _$identity);
@@ -153,9 +167,11 @@ abstract class _DetailViewState implements DetailViewState {
       _$_DetailViewState;
 
   @override
-  String get fontFace;
+  String get fontFace => throw _privateConstructorUsedError;
   @override
-  int get fontSize;
+  int get fontSize => throw _privateConstructorUsedError;
   @override
-  _$DetailViewStateCopyWith<_DetailViewState> get copyWith;
+  @JsonKey(ignore: true)
+  _$DetailViewStateCopyWith<_DetailViewState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

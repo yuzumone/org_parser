@@ -48,10 +48,6 @@ class HomeView extends StatelessWidget {
         child: _listWidgets.elementAt(pageIndex),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.search,
-          color: Colors.white,
-        ),
         backgroundColor: Colors.blue[300],
         tooltip: 'Search',
         onPressed: () => Navigator.push(
@@ -63,6 +59,10 @@ class HomeView extends StatelessWidget {
               child: SearchView(files: files),
             ),
           ),
+        ),
+        child: Icon(
+          Icons.search,
+          color: Colors.white,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -43,10 +43,10 @@ class AgendaView extends StatelessWidget {
         .where((x) => x.isTodo)
         .where((x) => x.scheduledDateTime != null)
         .where((x) =>
-            start.isBefore(x.scheduledDateTime) &&
-            end.isAfter(x.scheduledDateTime))
+            start.isBefore(x.scheduledDateTime!) &&
+            end.isAfter(x.scheduledDateTime!))
         .toList();
-    list.sort((x, y) => x.scheduledDateTime.compareTo(y.scheduledDateTime));
+    list.sort((x, y) => x.scheduledDateTime!.compareTo(y.scheduledDateTime!));
     return list;
   }
 
@@ -58,9 +58,9 @@ class AgendaView extends StatelessWidget {
         .where((x) => x.isTodo)
         .where((x) => todoKeywords.contains(x.keyword))
         .where((x) => x.scheduledDateTime != null)
-        .where((x) => x.scheduledDateTime.isBefore(today))
+        .where((x) => x.scheduledDateTime!.isBefore(today))
         .toList();
-    list.sort((x, y) => x.scheduledDateTime.compareTo(y.scheduledDateTime));
+    list.sort((x, y) => x.scheduledDateTime!.compareTo(y.scheduledDateTime!));
     return list;
   }
 
@@ -78,7 +78,7 @@ class AgendaView extends StatelessWidget {
         items.addAll(overAgendaList);
       }
       agendaList.forEach((y) {
-        var diff = y.scheduledDateTime.difference(x);
+        var diff = y.scheduledDateTime!.difference(x);
         if (0 <= diff.inHours && diff.inHours < 24) {
           items.add(y);
         }
@@ -109,6 +109,18 @@ class AgendaView extends StatelessWidget {
   Widget _buildListTile(BuildContext context, Headline headline,
       List<String> todoKeyword, List<String> doneKeyword) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
+              create: (_) => DetailViewStateNotifier(),
+              child: DetailView(headline: headline),
+            ),
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -117,7 +129,7 @@ class AgendaView extends StatelessWidget {
               flex: 2,
               child: Container(
                 child: Text(
-                  headline.scheduled,
+                  headline.scheduled!,
                   style: TextStyle(
                     color: todoKeyword.contains(headline.keyword)
                         ? Colors.red
@@ -144,18 +156,6 @@ class AgendaView extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
-              create: (_) => DetailViewStateNotifier(),
-              child: DetailView(headline: headline),
-            ),
-          ),
-        );
-      },
     );
   }
 }

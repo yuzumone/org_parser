@@ -30,6 +30,18 @@ class TodoView extends StatelessWidget {
 
   Widget _buildListTile(BuildContext context, Headline headline) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
+              create: (_) => DetailViewStateNotifier(),
+              child: DetailView(headline: headline),
+            ),
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(16.0),
         child: Container(
@@ -43,18 +55,6 @@ class TodoView extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
-              create: (_) => DetailViewStateNotifier(),
-              child: DetailView(headline: headline),
-            ),
-          ),
-        );
-      },
     );
   }
 }

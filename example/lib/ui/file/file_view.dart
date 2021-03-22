@@ -45,11 +45,11 @@ class _HeadlineListView extends StatelessWidget {
   final List<String> doneKeywords;
 
   _HeadlineListView(
-      {Key key,
-      @required this.name,
-      @required this.org,
-      @required this.todoKeywords,
-      @required this.doneKeywords})
+      {Key? key,
+      required this.name,
+      required this.org,
+      required this.todoKeywords,
+      required this.doneKeywords})
       : super(key: key);
 
   @override
@@ -78,15 +78,27 @@ class _HeadlineView extends StatelessWidget {
   final List<String> doneKeywords;
 
   _HeadlineView(
-      {Key key,
-      @required this.headline,
-      @required this.todoKeywords,
-      @required this.doneKeywords})
+      {Key? key,
+      required this.headline,
+      required this.todoKeywords,
+      required this.doneKeywords})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
+              create: (_) => DetailViewStateNotifier(),
+              child: DetailView(headline: headline),
+            ),
+          ),
+        );
+      },
       child: Padding(
         padding:
             EdgeInsets.only(left: 8.0, right: 16.0, top: 16.0, bottom: 16.0),
@@ -114,43 +126,31 @@ class _HeadlineView extends StatelessWidget {
                 height: 4.0,
               ),
               Visibility(
-                child: Text('Sheduled: ${headline.scheduled}'),
                 visible: headline.scheduled != null,
+                child: Text('Sheduled: ${headline.scheduled}'),
               ),
               SizedBox(
                 height: 4.0,
               ),
               Visibility(
-                child: Text('Deadline: ${headline.deadline}'),
                 visible: headline.deadline != null,
+                child: Text('Deadline: ${headline.deadline}'),
               )
             ],
           ),
         ),
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
-              create: (_) => DetailViewStateNotifier(),
-              child: DetailView(headline: headline),
-            ),
-          ),
-        );
-      },
     );
   }
 
-  Color _getTextColor(BuildContext context, String keyword, List<String> todos,
-      List<String> dones) {
+  Color? _getTextColor(BuildContext context, String? keyword,
+      List<String> todos, List<String> dones) {
     if (todos.contains(keyword)) {
       return Colors.red;
     } else if (dones.contains(keyword)) {
       return Colors.green;
     } else {
-      return Theme.of(context).textTheme.bodyText1.color;
+      return Theme.of(context).textTheme.bodyText1!.color;
     }
   }
 }

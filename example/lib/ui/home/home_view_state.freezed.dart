@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'home_view_state.dart';
 
@@ -9,11 +9,13 @@ part of 'home_view_state.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$HomeViewStateTearOff {
   const _$HomeViewStateTearOff();
 
-// ignore: unused_element
   _HomeViewState call(
       {int pageIndex = 0,
       List<File> files = const [],
@@ -33,19 +35,20 @@ class _$HomeViewStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $HomeViewState = _$HomeViewStateTearOff();
 
 /// @nodoc
 mixin _$HomeViewState {
-  int get pageIndex;
-  List<File> get files;
-  List<String> get urls;
-  List<String> get todoKeywords;
-  List<String> get doneKeywords;
-  int get weekDiff;
+  int get pageIndex => throw _privateConstructorUsedError;
+  List<File> get files => throw _privateConstructorUsedError;
+  List<String> get urls => throw _privateConstructorUsedError;
+  List<String> get todoKeywords => throw _privateConstructorUsedError;
+  List<String> get doneKeywords => throw _privateConstructorUsedError;
+  int get weekDiff => throw _privateConstructorUsedError;
 
-  $HomeViewStateCopyWith<HomeViewState> get copyWith;
+  @JsonKey(ignore: true)
+  $HomeViewStateCopyWith<HomeViewState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -73,24 +76,38 @@ class _$HomeViewStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object pageIndex = freezed,
-    Object files = freezed,
-    Object urls = freezed,
-    Object todoKeywords = freezed,
-    Object doneKeywords = freezed,
-    Object weekDiff = freezed,
+    Object? pageIndex = freezed,
+    Object? files = freezed,
+    Object? urls = freezed,
+    Object? todoKeywords = freezed,
+    Object? doneKeywords = freezed,
+    Object? weekDiff = freezed,
   }) {
     return _then(_value.copyWith(
-      pageIndex: pageIndex == freezed ? _value.pageIndex : pageIndex as int,
-      files: files == freezed ? _value.files : files as List<File>,
-      urls: urls == freezed ? _value.urls : urls as List<String>,
+      pageIndex: pageIndex == freezed
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      files: files == freezed
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<File>,
+      urls: urls == freezed
+          ? _value.urls
+          : urls // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       todoKeywords: todoKeywords == freezed
           ? _value.todoKeywords
-          : todoKeywords as List<String>,
+          : todoKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       doneKeywords: doneKeywords == freezed
           ? _value.doneKeywords
-          : doneKeywords as List<String>,
-      weekDiff: weekDiff == freezed ? _value.weekDiff : weekDiff as int,
+          : doneKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      weekDiff: weekDiff == freezed
+          ? _value.weekDiff
+          : weekDiff // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -124,24 +141,38 @@ class __$HomeViewStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object pageIndex = freezed,
-    Object files = freezed,
-    Object urls = freezed,
-    Object todoKeywords = freezed,
-    Object doneKeywords = freezed,
-    Object weekDiff = freezed,
+    Object? pageIndex = freezed,
+    Object? files = freezed,
+    Object? urls = freezed,
+    Object? todoKeywords = freezed,
+    Object? doneKeywords = freezed,
+    Object? weekDiff = freezed,
   }) {
     return _then(_HomeViewState(
-      pageIndex: pageIndex == freezed ? _value.pageIndex : pageIndex as int,
-      files: files == freezed ? _value.files : files as List<File>,
-      urls: urls == freezed ? _value.urls : urls as List<String>,
+      pageIndex: pageIndex == freezed
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      files: files == freezed
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<File>,
+      urls: urls == freezed
+          ? _value.urls
+          : urls // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       todoKeywords: todoKeywords == freezed
           ? _value.todoKeywords
-          : todoKeywords as List<String>,
+          : todoKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       doneKeywords: doneKeywords == freezed
           ? _value.doneKeywords
-          : doneKeywords as List<String>,
-      weekDiff: weekDiff == freezed ? _value.weekDiff : weekDiff as int,
+          : doneKeywords // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      weekDiff: weekDiff == freezed
+          ? _value.weekDiff
+          : weekDiff // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -154,13 +185,7 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
       this.urls = const [],
       this.todoKeywords = const [],
       this.doneKeywords = const [],
-      this.weekDiff = 0})
-      : assert(pageIndex != null),
-        assert(files != null),
-        assert(urls != null),
-        assert(todoKeywords != null),
-        assert(doneKeywords != null),
-        assert(weekDiff != null);
+      this.weekDiff = 0});
 
   @JsonKey(defaultValue: 0)
   @override
@@ -231,6 +256,7 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
       const DeepCollectionEquality().hash(doneKeywords) ^
       const DeepCollectionEquality().hash(weekDiff);
 
+  @JsonKey(ignore: true)
   @override
   _$HomeViewStateCopyWith<_HomeViewState> get copyWith =>
       __$HomeViewStateCopyWithImpl<_HomeViewState>(this, _$identity);
@@ -246,17 +272,19 @@ abstract class _HomeViewState implements HomeViewState {
       int weekDiff}) = _$_HomeViewState;
 
   @override
-  int get pageIndex;
+  int get pageIndex => throw _privateConstructorUsedError;
   @override
-  List<File> get files;
+  List<File> get files => throw _privateConstructorUsedError;
   @override
-  List<String> get urls;
+  List<String> get urls => throw _privateConstructorUsedError;
   @override
-  List<String> get todoKeywords;
+  List<String> get todoKeywords => throw _privateConstructorUsedError;
   @override
-  List<String> get doneKeywords;
+  List<String> get doneKeywords => throw _privateConstructorUsedError;
   @override
-  int get weekDiff;
+  int get weekDiff => throw _privateConstructorUsedError;
   @override
-  _$HomeViewStateCopyWith<_HomeViewState> get copyWith;
+  @JsonKey(ignore: true)
+  _$HomeViewStateCopyWith<_HomeViewState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

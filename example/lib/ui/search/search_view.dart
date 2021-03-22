@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class SearchView extends StatelessWidget {
   final List<File> files;
 
-  SearchView({Key key, @required this.files});
+  SearchView({Key? key, required this.files}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

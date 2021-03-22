@@ -19,10 +19,12 @@ jobs:
         with:
           channel: 'stable'
       - name: pub get
-        run: dart pub get
+        run: dart pub get && cd example && flutter pub get
       - name: format
         run: dart format --set-exit-if-changed .
       - name: analyze
-        run: dart analyze lib
+        run: dart analyze
       - name: test
         run: dart test test
+      - name: flutter test
+        run: cd example && flutter test

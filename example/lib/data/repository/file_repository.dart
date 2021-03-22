@@ -5,7 +5,7 @@ import 'package:org_parser/org_parser.dart';
 import 'package:org_parser_example/data/model/file.dart';
 
 class FileRepository {
-  RetryClient client;
+  late final RetryClient client;
 
   FileRepository() {
     client = RetryClient(
@@ -18,8 +18,8 @@ class FileRepository {
     );
   }
 
-  Future<File> getWebFile(String url, List<String> keywords) async {
-    var res = await client.get(url);
+  Future<File?> getWebFile(String url, List<String> keywords) async {
+    var res = await client.get(Uri.parse(url));
     if (res.statusCode < 300) {
       var org = await loadOrg(utf8.decode(res.bodyBytes), keywords: keywords);
       return File(url, org);
@@ -31,7 +31,7 @@ class FileRepository {
       List<String> urls, List<String> keywords) async {
     var files = <File>[];
     for (var url in urls) {
-      var res = await client.get(url);
+      var res = await client.get(Uri.parse(url));
       if (res.statusCode < 300) {
         var org = await loadOrg(utf8.decode(res.bodyBytes), keywords: keywords);
         files.add(File(url, org));

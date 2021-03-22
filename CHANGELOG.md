@@ -1,4 +1,4 @@
-## 1.0.0-dev
+## 1.0.0
 - Remove flutter dependence
 - Sound null safety
 

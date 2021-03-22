@@ -10,19 +10,19 @@ class PreferenceView extends StatelessWidget {
         (state) => state.viewType);
     return WillPopScope(
       onWillPop: () async {
-        if (viewType == PreferenceViewType.Main) {
+        if (viewType == PreferenceViewType.main) {
           Navigator.of(context).pop();
         } else {
           context
               .read<PreferenceViewStateNotifier>()
-              .setViewType(PreferenceViewType.Main);
+              .setViewType(PreferenceViewType.main);
         }
         return false;
       },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Preference'),
-          leading: viewType == PreferenceViewType.Main
+          leading: viewType == PreferenceViewType.main
               ? null
               : IconButton(
                   icon: Icon(
@@ -32,11 +32,11 @@ class PreferenceView extends StatelessWidget {
                   onPressed: () {
                     context
                         .read<PreferenceViewStateNotifier>()
-                        .setViewType(PreferenceViewType.Main);
+                        .setViewType(PreferenceViewType.main);
                   }),
         ),
         body: Container(
-          child: viewType == PreferenceViewType.Main
+          child: viewType == PreferenceViewType.main
               ? _MainPreferenceView()
               : _PreferenceInputView(),
         ),
@@ -45,7 +45,7 @@ class PreferenceView extends StatelessWidget {
   }
 }
 
-Future<String> _buildInputDialog(BuildContext context, String title) async {
+Future<String?> _buildInputDialog(BuildContext context, String title) async {
   var result = '';
   return showDialog<String>(
     context: context,
@@ -64,13 +64,13 @@ Future<String> _buildInputDialog(BuildContext context, String title) async {
           ],
         ),
         actions: <Widget>[
-          FlatButton(
-            child: Text('OK'),
+          TextButton(
             onPressed: () => Navigator.of(context).pop(result),
+            child: Text('OK'),
           ),
-          FlatButton(
-            child: Text('CANCEL'),
+          TextButton(
             onPressed: () => Navigator.of(context).pop(null),
+            child: Text('CANCEL'),
           )
         ],
       );
@@ -114,7 +114,7 @@ class _MainPreferenceView extends StatelessWidget {
             onTap: () {
               context
                   .read<PreferenceViewStateNotifier>()
-                  .setViewType(PreferenceViewType.OrgUrl);
+                  .setViewType(PreferenceViewType.orgUrl);
             },
           ),
           ListTile(
@@ -123,7 +123,7 @@ class _MainPreferenceView extends StatelessWidget {
             onTap: () {
               context
                   .read<PreferenceViewStateNotifier>()
-                  .setViewType(PreferenceViewType.Todo);
+                  .setViewType(PreferenceViewType.todo);
             },
           ),
           ListTile(
@@ -132,7 +132,7 @@ class _MainPreferenceView extends StatelessWidget {
             onTap: () {
               context
                   .read<PreferenceViewStateNotifier>()
-                  .setViewType(PreferenceViewType.Done);
+                  .setViewType(PreferenceViewType.done);
             },
           ),
           ListTile(
@@ -140,7 +140,8 @@ class _MainPreferenceView extends StatelessWidget {
             trailing: DropdownButton(
               value: context.select<PreferenceViewState, String>(
                   (state) => state.fontFace),
-              onChanged: (String newValue) {
+              onChanged: (String? newValue) {
+                if (newValue == null) return;
                 context
                     .read<PreferenceViewStateNotifier>()
                     .setFontFace(newValue);
@@ -160,7 +161,8 @@ class _MainPreferenceView extends StatelessWidget {
               value: context
                   .select<PreferenceViewState, int>((state) => state.fontSize)
                   .toString(),
-              onChanged: (String newValue) {
+              onChanged: (String? newValue) {
+                if (newValue == null) return;
                 context
                     .read<PreferenceViewStateNotifier>()
                     .setFontSize(int.parse(newValue));
@@ -187,15 +189,15 @@ class _PreferenceInputView extends StatelessWidget {
         (state) => state.viewType);
     var _items = <String>[];
     switch (_viewType) {
-      case PreferenceViewType.OrgUrl:
+      case PreferenceViewType.orgUrl:
         _items = context
             .select<PreferenceViewState, List<String>>((state) => state.urls);
         break;
-      case PreferenceViewType.Todo:
+      case PreferenceViewType.todo:
         _items = context.select<PreferenceViewState, List<String>>(
             (state) => state.todoKeywords);
         break;
-      case PreferenceViewType.Done:
+      case PreferenceViewType.done:
         _items = context.select<PreferenceViewState, List<String>>(
             (state) => state.doneKeywords);
         break;
@@ -210,17 +212,17 @@ class _PreferenceInputView extends StatelessWidget {
             title: Text(_items[index]),
             onLongPress: () {
               switch (_viewType) {
-                case PreferenceViewType.OrgUrl:
+                case PreferenceViewType.orgUrl:
                   context
                       .read<PreferenceViewStateNotifier>()
                       .setUrls(List.from(_items)..removeAt(index));
                   break;
-                case PreferenceViewType.Todo:
+                case PreferenceViewType.todo:
                   context
                       .read<PreferenceViewStateNotifier>()
                       .setTodoKeywords(List.from(_items)..removeAt(index));
                   break;
-                case PreferenceViewType.Done:
+                case PreferenceViewType.done:
                   context
                       .read<PreferenceViewStateNotifier>()
                       .setDoneKeywords(List.from(_items)..removeAt(index));
@@ -233,23 +235,22 @@ class _PreferenceInputView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         backgroundColor: Colors.blue,
         onPressed: () async {
           final result = await _buildInputDialog(context, 'Input File Url');
           if (result != null) {
             switch (_viewType) {
-              case PreferenceViewType.OrgUrl:
+              case PreferenceViewType.orgUrl:
                 context
                     .read<PreferenceViewStateNotifier>()
                     .setUrls(List.from(_items)..add(result));
                 break;
-              case PreferenceViewType.Todo:
+              case PreferenceViewType.todo:
                 context
                     .read<PreferenceViewStateNotifier>()
                     .setTodoKeywords(List.from(_items)..add(result));
                 break;
-              case PreferenceViewType.Done:
+              case PreferenceViewType.done:
                 context
                     .read<PreferenceViewStateNotifier>()
                     .setDoneKeywords(List.from(_items)..add(result));
@@ -259,6 +260,7 @@ class _PreferenceInputView extends StatelessWidget {
             }
           }
         },
+        child: Icon(Icons.add),
       ),
     );
   }

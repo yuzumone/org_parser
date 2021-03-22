@@ -6,7 +6,7 @@ import 'package:org_parser/org_parser.dart';
 class DetailView extends StatelessWidget {
   final Headline headline;
 
-  DetailView({Key key, @required this.headline}) : super(key: key);
+  DetailView({Key? key, required this.headline}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,3 @@
-library org_parser;
-
 class OrgFile {
   List<Headline> headlines = [];
 

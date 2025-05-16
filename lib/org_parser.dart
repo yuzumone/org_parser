@@ -1,18 +1,20 @@
-library org_parser;
-
 import 'dart:async';
 
 import 'src/model.dart';
 export 'src/model.dart';
 
-Future<OrgFile> loadOrg(String lines,
-    {List<String> keywords = const ['TODO', 'DONE']}) async {
+Future<OrgFile> loadOrg(
+  String lines, {
+  List<String> keywords = const ['TODO', 'DONE'],
+}) async {
   var p = OrgParser(lines.split('\n'), keywords);
   return await p.parse();
 }
 
-Future<OrgFile> loadsOrg(List<String> lines,
-    {List<String> keywords = const ['TODO', 'DONE']}) async {
+Future<OrgFile> loadsOrg(
+  List<String> lines, {
+  List<String> keywords = const ['TODO', 'DONE'],
+}) async {
   var p = OrgParser(lines, keywords);
   return await p.parse();
 }
@@ -25,9 +27,11 @@ class OrgParser {
   var headlineRegex = RegExp(r'^(\*+)\s+(.*?)\s*$');
   var todoRegex = RegExp(r'^([\d\w]+)\s+(.*?)\s*$');
   var scheduleRegex = RegExp(
-      r'SCHEDULED:\s+<((\d{4})-(\d{2})-(\d{2})\s+\w{3}\s*((\d{2}):(\d{2}))?-*((\d{2}):(\d{2}))?\s*\+?([\ddwmy]*))>');
+    r'SCHEDULED:\s+<((\d{4})-(\d{2})-(\d{2})\s+\w{3}\s*((\d{2}):(\d{2}))?-*((\d{2}):(\d{2}))?\s*\+?([\ddwmy]*))>',
+  );
   var deadlineRegex = RegExp(
-      r'DEADLINE:\s+<((\d{4})-(\d{2})-(\d{2})\s+\w{3}\s*((\d{2}):(\d{2}))?-*((\d{2}):(\d{2}))?\s*\+?([\ddwmy]*))>');
+    r'DEADLINE:\s+<((\d{4})-(\d{2})-(\d{2})\s+\w{3}\s*((\d{2}):(\d{2}))?-*((\d{2}):(\d{2}))?\s*\+?([\ddwmy]*))>',
+  );
 
   OrgParser(this.lines, this.keywords);
 

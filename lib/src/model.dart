@@ -18,8 +18,10 @@ class Headline {
   String? name;
   String? scheduled;
   DateTime? scheduledDateTime;
+  DateTime? scheduledEndDateTime;
   String? deadline;
   DateTime? deadlineDateTime;
+  DateTime? deadlineEndDateTime;
 
   Headline(this.level, this.title, this.chunks, this.raw);
 

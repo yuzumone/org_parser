@@ -7,7 +7,7 @@ Future<OrgFile> loadOrg(
   String lines, {
   List<String> keywords = const ['TODO', 'DONE'],
 }) async {
-  var p = OrgParser(lines.split('\n'), keywords);
+  final p = OrgParser(lines.split('\n'), keywords);
   return await p.parse();
 }
 
@@ -15,22 +15,22 @@ Future<OrgFile> loadsOrg(
   List<String> lines, {
   List<String> keywords = const ['TODO', 'DONE'],
 }) async {
-  var p = OrgParser(lines, keywords);
+  final p = OrgParser(lines, keywords);
   return await p.parse();
 }
 
 class OrgParser {
   List<String> lines;
   List<String> keywords;
-  var chunkRegex = RegExp(r'^\*+ ');
-  var commentRegex = RegExp(r'^#\+.*');
-  var headlineRegex = RegExp(r'^(\*+)\s+(.*?)\s*$');
-  var todoRegex = RegExp(r'^([\d\w]+)\s+(.*?)\s*$');
-  var scheduleRegex = RegExp(
-    r'SCHEDULED:\s+<((\d{4})-(\d{2})-(\d{2})\s+\w{3}\s*((\d{2}):(\d{2}))?-*((\d{2}):(\d{2}))?\s*\+?([\ddwmy]*))>',
+  final chunkRegex = RegExp(r'^\*+ ');
+  final commentRegex = RegExp(r'^#\+.*');
+  final headlineRegex = RegExp(r'^(\*+)\s+(.*?)\s*$');
+  final todoRegex = RegExp(r'^([\d\w]+)\s+(.*?)\s*$');
+  final scheduleRegex = RegExp(
+    r'SCHEDULED:\s+<((?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})(?: \w+)?(?: (?<startHour>\d{2}):(?<startMinute>\d{2}))?(?:-+(?<endHour>\d{2}):(?<endMinute>\d{2}))?(?: [\.\+\/\w]+)?)>(?:-+<((?<endYear>\d{4})-(?<endMonth>\d{2})-(?<endDay>\d{2})(?: \w+)?(?: (?<anotherHour>\d{2}):(?<anotherMinute>\d{2}))?)>)?',
   );
-  var deadlineRegex = RegExp(
-    r'DEADLINE:\s+<((\d{4})-(\d{2})-(\d{2})\s+\w{3}\s*((\d{2}):(\d{2}))?-*((\d{2}):(\d{2}))?\s*\+?([\ddwmy]*))>',
+  final deadlineRegex = RegExp(
+    r'DEADLINE:\s+<((?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})(?: \w+)?(?: (?<startHour>\d{2}):(?<startMinute>\d{2}))?(?:-+(?<endHour>\d{2}):(?<endMinute>\d{2}))?(?: [\.\+\/\w]+)?)>(?:-+<((?<endYear>\d{4})-(?<endMonth>\d{2})-(?<endDay>\d{2})(?: \w+)?(?: (?<anotherHour>\d{2}):(?<anotherMinute>\d{2}))?)>)?',
   );
 
   OrgParser(this.lines, this.keywords);
@@ -74,32 +74,77 @@ class OrgParser {
   }
 
   Headline parseTodo(Headline headline) {
-    var todoMatch = todoRegex.firstMatch(headline.title);
+    final todoMatch = todoRegex.firstMatch(headline.title);
     if (todoMatch != null) {
       var keyword = todoMatch.group(1);
       var name = todoMatch.group(2);
       headline.keyword = keyword;
       headline.name = name;
     }
-    var scheduleMatch = scheduleRegex.firstMatch(headline.raw);
+    final scheduleMatch = scheduleRegex.firstMatch(headline.raw);
     if (scheduleMatch != null) {
       headline.scheduled = scheduleMatch.group(1);
-      headline.scheduledDateTime = _parseDateTime(scheduleMatch);
+      if (scheduleMatch.group(9) != null) {
+        headline.scheduled =
+            '${scheduleMatch.group(1)} -- ${scheduleMatch.group(9)}';
+      }
+      final (start: scheduleStart, end: scheduleEnd) = _parseDateTime(
+        scheduleMatch,
+      );
+      headline.scheduledDateTime = scheduleStart;
+      headline.scheduledEndDateTime = scheduleEnd;
     }
-    var deadlineMatch = deadlineRegex.firstMatch(headline.raw);
+    final deadlineMatch = deadlineRegex.firstMatch(headline.raw);
     if (deadlineMatch != null) {
       headline.deadline = deadlineMatch.group(1);
-      headline.deadlineDateTime = _parseDateTime(deadlineMatch);
+      if (deadlineMatch.group(9) != null) {
+        headline.deadline =
+            '${deadlineMatch.group(1)} -- ${deadlineMatch.group(9)}';
+      }
+      final (start: deadlineStart, end: deadlineEnd) = _parseDateTime(
+        deadlineMatch,
+      );
+      headline.deadlineDateTime = deadlineStart;
+      headline.deadlineEndDateTime = deadlineEnd;
     }
     return headline;
   }
 
-  DateTime _parseDateTime(RegExpMatch match) {
-    var year = int.parse(match.group(2)!);
-    var month = int.parse(match.group(3)!);
-    var day = int.parse(match.group(4)!);
-    var hour = int.parse(match.group(6) ?? '0');
-    var minute = int.parse(match.group(7) ?? '0');
-    return DateTime(year, month, day, hour, minute);
+  ({DateTime start, DateTime? end}) _parseDateTime(RegExpMatch match) {
+    final year = int.parse(match.namedGroup('year')!);
+    final month = int.parse(match.namedGroup('month')!);
+    final day = int.parse(match.namedGroup('day')!);
+    final startHour = int.parse(match.namedGroup('startHour') ?? '0');
+    final startMinute = int.parse(match.namedGroup('startMinute') ?? '0');
+    final endHour = match.namedGroup('endHour');
+    final endMinute = match.namedGroup('endMinute');
+    final endYear = match.namedGroup('endYear');
+    final endMonth = match.namedGroup('endMonth');
+    final endDay = match.namedGroup('endDay');
+    final anotherHour = match.namedGroup('anotherHour');
+    final anotherMinute = match.namedGroup('anotherMinute');
+    final startDateTime = DateTime(year, month, day, startHour, startMinute);
+
+    DateTime? endDateTime;
+    if (endHour != null && endMinute != null) {
+      endDateTime = DateTime(
+        year,
+        month,
+        day,
+        int.parse(endHour),
+        int.parse(endMinute),
+      );
+    }
+    if (endYear != null && endMonth != null && endDay != null) {
+      endDateTime = DateTime(
+        int.parse(endYear),
+        int.parse(endMonth),
+        int.parse(endDay),
+        int.parse(anotherHour ?? '0'),
+        int.parse(anotherMinute ?? '0'),
+      );
+    }
+
+    return (start: startDateTime, end: endDateTime);
   }
 }
